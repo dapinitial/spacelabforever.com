@@ -64,7 +64,7 @@ input[type=number] {
     margin: 0;
 }
 
-.hero {
+.hero { 
     --fontSize: 3em;
     --lineHeight: 1em;
     width: auto;
@@ -400,4 +400,12 @@ button {
 
 .cursor-shadow.active-blog-post-7 {
     background-image: url('../../public/assets/jpg/calligraphiti.jpg');
+}
+
+[id$="note"] {
+    height: auto;
+    padding: 4px;
+    & svg {
+        height: 13px;
+    }
 }
