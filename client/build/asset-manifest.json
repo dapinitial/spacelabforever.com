@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.cacd4f26.css",
-    "main.js": "/static/js/main.cf7ffc75.js",
+    "main.css": "/static/css/main.b6fde348.css",
+    "main.js": "/static/js/main.2476d0a5.js",
     "static/media/calligraphiti.jpg": "/static/media/calligraphiti.96407d83fa00f3aa7e9b.jpg",
     "index.html": "/index.html",
-    "main.cacd4f26.css.map": "/static/css/main.cacd4f26.css.map",
-    "main.cf7ffc75.js.map": "/static/js/main.cf7ffc75.js.map"
+    "main.b6fde348.css.map": "/static/css/main.b6fde348.css.map",
+    "main.2476d0a5.js.map": "/static/js/main.2476d0a5.js.map"
   },
   "entrypoints": [
-    "static/css/main.cacd4f26.css",
-    "static/js/main.cf7ffc75.js"
+    "static/css/main.b6fde348.css",
+    "static/js/main.2476d0a5.js"
   ]
 }
