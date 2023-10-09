@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.cacd4f26.css",
+    "main.js": "/static/js/main.cf7ffc75.js",
+    "static/media/calligraphiti.jpg": "/static/media/calligraphiti.96407d83fa00f3aa7e9b.jpg",
+    "index.html": "/index.html",
+    "main.cacd4f26.css.map": "/static/css/main.cacd4f26.css.map",
+    "main.cf7ffc75.js.map": "/static/js/main.cf7ffc75.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cacd4f26.css",
+    "static/js/main.cf7ffc75.js"
+  ]
+}

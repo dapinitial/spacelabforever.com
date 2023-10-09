@@ -1,0 +1,36 @@
+.classSchedule {
+    font-family: 'Dosis', sans-serif;
+    margin-left: 20px;
+    margin-bottom: 40px;
+    text-align: left;
+
+    tr th,
+    tr td {
+        padding: 10px;
+    }
+
+}
+
+.header {
+    align-items: center;
+    background-color: rgba(255, 255, 255, .2);
+    color: rgba(255, 255, 255, .7);
+    font-family: 'Dosis', sans-serif;
+    font-size: 20px;
+    text-align: left;
+    display: flex;
+    max-width: 70%;
+    padding-left: 14px;
+}
+
+.dateStyle {
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.tableText {
+    font-family: 'Dosis', sans-serif;
+    margin-left: 20px;
+    margin: 40px;
+    text-align: left;
+}

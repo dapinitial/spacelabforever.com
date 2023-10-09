@@ -1,0 +1,117 @@
+.blogform {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: left;
+
+    .formlabel {
+        color: rgba(255, 255, 255, .75);
+        display: block;
+        margin-bottom: 6px;
+    }
+
+
+    & input[type="text"],
+    & input[type="email"],
+    & input[type="number"],
+    & textarea {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 4px;
+        margin-bottom: 16px;
+        background-color: #f0f0f0;
+        color: #333;
+        font-size: 16px;
+    }
+
+    & textarea {
+        height: 120px;
+    }
+
+    & button[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 12px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+        margin-left: auto;
+    }
+
+    & button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    & .successmessage {
+        color: #008000;
+        font-weight: bold;
+        margin-top: 16px;
+    }
+
+    & .errormessage {
+        color: #ff0000;
+        font-weight: bold;
+        margin-top: 16px;
+    }
+}
+
+.blogpost {
+    padding: 100px 40px;
+    font-size: 3em;
+    font-family: 'Dosis';
+    opacity: .3;
+    transition: 300ms linear all;
+
+    & .visible {
+        opacity: 1;
+        transition: 300ms linear all;
+    }
+}
+
+/* #Blog post
+================================================== */
+
+.blogpost__box {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    padding: 40px;
+}
+
+.blogpost__box h5 {
+    position: relative;
+    text-transform: none;
+    cursor: pointer;
+    mix-blend-mode: difference;
+    z-index: 3;
+    -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+}
+
+.blogpost__box:hover {
+    background-color: rgba(255, 255, 255, .2);
+    border-radius: 8px;
+}
+
+.blogpost__box p {
+    position: relative;
+    color: #c4c3ca;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    display: inline-block;
+    mix-blend-mode: luminosity;
+    padding: 4px 12px;
+    background-color: rgba(127, 110, 210, .8);
+    border-radius: 2px;
+    z-index: 4;
+}
+
+.oldernews {
+    background: #111;
+    font-family: 'Dosis';
+    font-size: 2em;
+    padding: 100px 40px 200px;
+}

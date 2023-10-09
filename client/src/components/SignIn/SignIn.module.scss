@@ -1,0 +1,173 @@
+.section {
+    width: 100%;
+    max-width: 420px;
+    min-height: 400px;
+    display: grid;
+    padding: 60px 20px 20px 20px;
+    border: 1px solid rgba(255, 255, 255, .1);
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+}
+
+.h3 {
+    font-family: 'Dosis', sans-serif;
+    font-size: 16px;
+    text-align: left;
+    text-transform: capitalize;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-grow: 1;
+    place-self: center;
+    padding-bottom: 20px;
+    font-family: 'Dosis', sans-serif;
+}
+
+.link {
+    color: #fff;
+    font-family: 'Dosis', sans-serif;
+
+    &:visited {
+        color: #999;
+        text-decoration: line-through !important;
+    }
+
+    &:hover {
+        color: #7f6ed2;
+    }
+}
+
+.inputText,
+.inputPassword,
+.formButton,
+.textarea {
+    font-family: 'Dosis', sans-serif;
+    font-size: 22px;
+    padding: 20px;
+    border-radius: 3px;
+}
+
+.inputText,
+.inputPassword {
+    background: rgba(255, 255, 255, .2);
+    border: 0;
+    color: #fff;
+    font-family: 'Dosis', sans-serif;
+
+    &::placeholder {
+        font-family: 'Dosis', sans-serif;
+        font-size: 14px;
+        color: #999;
+    }
+
+}
+
+.label {
+    font-family: 'Dosis', sans-serif;
+    color: #7f6ed2;
+    text-align: left;
+    line-height: 24px;
+    margin-bottom: 4px;
+}
+
+.bodyCopy {
+    font-family: 'Dosis', sans-serif;
+    color: #7f6ed2;
+    line-height: 24px;
+    margin-bottom: 4px;
+}
+
+.label,
+.formButton {
+    margin-top: 40px;
+}
+
+.formButton {
+    padding: 10px;
+    border: 1px solid #999;
+    background: rgba(255, 255, 255, .2);
+    font-size: 15px;
+    font-weight: 100;
+    letter-spacing: 1.25px;
+    text-transform: capitalize;
+
+    &:hover {
+        background: rgba(255, 255, 255, .3);
+        border: 1px solid #fff;
+        cursor: pointer;
+    }
+
+    &:disabled {
+        pointer-events: none;
+        opacity: .4;
+    }
+}
+
+.instructions {
+    font-size: 12px;
+    border-radius: 3px;
+    background: #000;
+    color: #fff;
+    padding: 10px;
+    position: relative;
+    bottom: -10px;
+}
+
+.instructions>svg {
+    margin-right: 6px;
+}
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.hide {
+    display: none;
+}
+
+.valid {
+    color: limegreen;
+    margin-left: 8px;
+}
+
+.invalid {
+    color: red;
+    margin-left: 8px;
+}
+
+.errmsg {
+    background-color: lightpink;
+    color: firebrick;
+    font-family: 'Dosis', sans-serif;
+    font-size: 22px;
+    padding: 20px;
+    border-radius: 3px;
+}
+
+.line {
+    display: inline-block;
+}
+
+
+.persistCheck {
+    font-size: 0.75rem;
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.persistCheck label {
+    margin: 0;
+}
+
+.persistCheck [type="checkbox"] {
+    height: 20px;
+    width: 20px;
+    margin: 0 5px 2px 2px;
+}

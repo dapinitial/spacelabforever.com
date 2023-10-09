@@ -1,0 +1,22 @@
+.NavBar {
+    position: fixed;
+    top: 0;
+    right: 16px;
+    z-index: 1;
+
+    ul {
+        li a {
+            cursor: 'pointer';
+            display: block;
+            padding: 10px;
+            font-family: 'Dosis', sans-serif;
+            font-size: 12px;
+            text-transform: uppercase;
+            text-align: right;
+
+            &:hover {
+                background: rgba(255, 255, 255, .2);
+            }
+        }
+    }
+}

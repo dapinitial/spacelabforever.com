@@ -1,0 +1,8 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/2ee4c4df-cae7-4e98-81d9-cb6e66fac782/resourceGroups/spacelabforever-rg/providers/Microsoft.Web/sites/spacelabforever",
+    "appService.deploySubpath": ".",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.autopep8"
+    },
+    "python.formatting.provider": "none"
+}

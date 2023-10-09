@@ -1,0 +1,63 @@
+$bar-size: 70px;
+$bar-speed: 1.4s;
+$bar-width: ceil($bar-size / 4);
+$bar-gutter-width: floor(($bar-size - $bar-width * 2) / 4.5);
+$bar-color: #fff;
+
+.kexpLogo {
+    display: flex;
+    position: relative;
+    cursor: pointer;
+    transform: scale(.4);
+}
+
+.iconBars {
+    transform: scale(.75);
+    position: relative;
+    width: $bar-size;
+    height: $bar-size;
+    visibility: hidden;
+
+    &.animating {
+        visibility: visible;
+    }
+
+    .bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        top: 0;
+        width: $bar-width;
+        background-color: $bar-color;
+        animation: up-down $bar-speed infinite;
+
+        &:nth-child(2) {
+            left: $bar-width + $bar-gutter-width;
+            animation-delay: -$bar-speed / 3 * 2.1;
+        }
+
+        &:nth-child(3) {
+            left: $bar-width * 2 + $bar-gutter-width * 2.25;
+            animation-delay: -$bar-speed / 3;
+        }
+
+        &:nth-child(4) {
+            left: $bar-width * 3 + $bar-gutter-width * 3.75;
+            animation-delay: -$bar-speed / 2;
+        }
+    }
+}
+
+@keyframes up-down {
+    from {
+        top: $bar-size;
+    }
+
+    50% {
+        top: 0;
+    }
+
+    to {
+        top: $bar-size;
+    }
+}

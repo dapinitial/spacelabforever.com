@@ -1,0 +1,60 @@
+diff --git a/node_modules/threejs-toys/src/cursors/neon/index.js b/node_modules/threejs-toys/src/cursors/neon/index.js
+index 93bf7da..1d4ea89 100644
+--- a/node_modules/threejs-toys/src/cursors/neon/index.js
++++ b/node_modules/threejs-toys/src/cursors/neon/index.js
+@@ -41,10 +41,10 @@ export default function (params) {
+   three({
+     ...threeConfig,
+     antialias: false,
+-    initCamera (three) {
++    initCamera(three) {
+       three.camera = new OrthographicCamera()
+     },
+-    initScene ({ scene }) {
++    initScene({ scene }) {
+       const geometry = new PlaneGeometry(2, 2)
+       material = new ShaderMaterial({
+         uniforms: { uRatio, uSize, uPoints, uColor },
+@@ -144,7 +144,7 @@ export default function (params) {
+       plane = new Mesh(geometry, material)
+       scene.add(plane)
+     },
+-    afterResize ({ width, height }) {
++    afterResize({ width, height }) {
+       uSize.value.set(config.radius1, config.radius2)
+       if (width >= height) {
+         uRatio.value.set(1, height / width)
+@@ -154,7 +154,7 @@ export default function (params) {
+         uSize.value.multiplyScalar(1 / height)
+       }
+     },
+-    beforeRender ({ clock, width, height, wWidth }) {
++    beforeRender({ clock, width, height, wWidth }) {
+       for (let i = 1; i < config.curvePoints; i++) {
+         points[i].lerp(points[i - 1], config.curveLerp)
+       }
+@@ -182,7 +182,7 @@ export default function (params) {
+         velocity.multiplyScalar(0.95)
+       }
+     },
+-    onPointerMove ({ nPosition, delta }) {
++    onPointerMove({ nPosition, delta }) {
+       hover = true
+       const x = (0.5 * nPosition.x) * uRatio.value.x
+       const y = (0.5 * nPosition.y) * uRatio.value.y
+@@ -193,7 +193,14 @@ export default function (params) {
+       velocityTarget.z = Math.sqrt(velocityTarget.x * velocityTarget.x + velocityTarget.y * velocityTarget.y)
+       velocity.lerp(velocityTarget, 0.05)
+     },
+-    onPointerLeave () {
++    onMouseMove({ pageX, pageY }) {
++      if (hover) {
++        const x = (0.5 * pageX) * uRatio.value.x
++        const y = (0.5 * pageY) * uRatio.value.y
++        spline.points[0].set(x, y)
++      }
++    },
++    onPointerLeave() {
+       hover = false
+     }
+   })
