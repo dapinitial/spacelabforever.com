@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import apiUrl from '../../config';
 import styles from './Contact.module.scss';
 import TextScrambler from '../../components/TextScambler/TextScrambler';
+import Loader from '../../components/Loader/Loader';
 
 const Contact = () => {
     const navigate = useNavigate();
@@ -10,6 +11,7 @@ const Contact = () => {
     const [email, setEmail] = useState('');
     const [website, setWebsite] = useState('');
     const [message, setMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -55,32 +57,35 @@ const Contact = () => {
     const [phrases, setPhrases] = useState(['Sending message', 'Please wait']);
     let herophrases = ['contact', 'reach out', 'connect'];
 
+
+
     return (
-        <section className="container">
-            <h1 className="hero subpage"><TextScrambler phrases={herophrases} /></h1>
-            {errorMessage && <p className={styles.errormessage}>Error: {errorMessage}</p>}
-            <form className={`${styles.contactform} ${isSubmitting ? styles.dimmed : ''}`} onSubmit={handleSubmit}>
-                <div>
-                    <label className={styles.formlabel} htmlFor="name">Name:</label>
-                    <input required type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
-                </div>
-                <div>
-                    <label className={styles.formlabel} htmlFor="email">Email:</label>
-                    <input required type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                </div>
-                <div>
-                    <label className={styles.formlabel} htmlFor="website">Website:</label>
-                    <input type="text" id="website" value={website} onChange={(e) => setWebsite(e.target.value)} />
-                </div>
-                <div>
-                    <label className={styles.formlabel} htmlFor="message">Message:</label>
-                    <textarea required id="message" value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
-                </div>
-                <div className="buttonbar">
-                    <button type="submit" disabled={isSubmitting}>{isSubmitting ? <TextScrambler phrases={phrases} /> : 'Submit'}</button>
-                </div>
-            </form>
-        </section>
+        isLoading ? <Loader /> :
+            <section className="container">
+                <h1 className="hero subpage"><TextScrambler phrases={herophrases} /></h1>
+                {errorMessage && <p className={styles.errormessage}>Error: {errorMessage}</p>}
+                <form className={`${styles.contactform} ${isSubmitting ? styles.dimmed : ''}`} onSubmit={handleSubmit}>
+                    <div>
+                        <label className={styles.formlabel} htmlFor="name">Name:</label>
+                        <input required type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
+                    </div>
+                    <div>
+                        <label className={styles.formlabel} htmlFor="email">Email:</label>
+                        <input required type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    </div>
+                    <div>
+                        <label className={styles.formlabel} htmlFor="website">Website:</label>
+                        <input type="text" id="website" value={website} onChange={(e) => setWebsite(e.target.value)} />
+                    </div>
+                    <div>
+                        <label className={styles.formlabel} htmlFor="message">Message:</label>
+                        <textarea required id="message" value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
+                    </div>
+                    <div className="buttonbar">
+                        <button type="submit" disabled={isSubmitting}>{isSubmitting ? <TextScrambler phrases={phrases} /> : 'Submit'}</button>
+                    </div>
+                </form>
+            </section>
     );
 };
 

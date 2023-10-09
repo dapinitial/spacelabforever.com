@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import apiUrl from '../../config';
 import styles from './Blog.module.scss';
+import Loader from '../../components/Loader/Loader';
 
 const CreateBlogPost = () => {
   const [title, setTitle] = useState('');
@@ -54,7 +55,7 @@ const CreateBlogPost = () => {
 
   return (
     <div>
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <Loader />}
       {isSuccess && <p>Blog post created successfully!</p>}
       <form className={styles.blogform} onSubmit={handleSubmit}>
         <div>

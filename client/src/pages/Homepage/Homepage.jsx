@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import Loader from '../../components/Loader/Loader';
 import apiUrl from '../../config';
 import styles from './Homepage.module.scss';
 import ScrollBanner from '../../components/ScrollBanner';
 
 function Homepage() {
+  const [isLoading, setIsLoading] = useState(true);
   const [sensorData, setSensorData] = useState([]);
   const phrases = [
     'spacelab\'s forever',
@@ -25,6 +27,7 @@ function Homepage() {
       const response = await fetch(`${apiUrl}/getLatestSensorData`);
       if (response.ok) {
         const data = await response.json();
+        setIsLoading(false);
         if (Array.isArray(data)) {
           setSensorData(data);
         } else if (data !== null) {
@@ -44,7 +47,7 @@ function Homepage() {
     fetchSensorData();
   }, []);
 
-  return (
+  return (isLoading ? <Loader /> :
     <section className="container section">
       <ScrollBanner disableScrollEffects subheading={'Hello world'} phrases={phrases} />
     </section>

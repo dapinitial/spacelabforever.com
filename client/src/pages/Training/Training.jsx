@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import Loader from '../../components/Loader/Loader';
 import styles from './Training.module.scss';
 import apiUrl from '../../config';
 
 const Training = () => {
     const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [data, setData] = useState(null);
 
@@ -101,7 +102,7 @@ const Training = () => {
         fetchData(selectedDate);
     }, [selectedDate]);
 
-    return (
+    return (loading ? <Loader /> :
         <section className="container">
             <h2 className={styles.header}>
                 Downtown Seattle YMCA &nbsp;

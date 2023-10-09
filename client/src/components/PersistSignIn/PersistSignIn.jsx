@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import useRefreshToken from '../../hooks/useRefreshToken';
 import useAuth from '../../hooks/useAuth';
 import useLocalStorage from "../../hooks/useLocalStorage";
+import Loader from '../Loader/Loader';
 
 const PersistSignIn = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -35,17 +36,12 @@ const PersistSignIn = () => {
         }
     }, [persist]);
 
-    useEffect(() => {
-        console.log(`isLoading: ${isLoading}`)
-        console.log(`aT: ${JSON.stringify(auth?.accessToken)}`)
-    }, [isLoading])
-
     return (
         <>
             {!persist
                 ? <Outlet />
                 : isLoading
-                    ? <p>Loading...</p>
+                    ? <Loader />
                     : <Outlet />
             }
         </>

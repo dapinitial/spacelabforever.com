@@ -1,0 +1,168 @@
+@keyframes rotate-circle {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.LoadingComponent__circle, 
+.LoadingComponent__circleInner, 
+.LoadingComponent__lineMask, 
+.LoadingComponent__symbol {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+}
+
+.LoadingComponent__shade {
+  height: 100%;
+  opacity: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  visibility: visible;
+  width: 100%;
+  &.complete {
+    background: transparent;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53), 
+      visibility 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53), 
+      background 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  }
+}
+
+.LoadingComponent__circle {
+  height: 50px;
+  width: 50px;
+  margin: -30px 0 0 -30px;
+  transform: scale(2.5);
+  transform-origin: center;
+}
+
+.LoadingComponent__circleInner {
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  transform-origin: center;
+}
+
+.LoadingComponent__lineMask {
+  animation: rotate-circle 1.2s infinite linear;
+  height: 120px;
+  margin-left: -60px;
+  margin-top: -60px;
+  overflow: hidden;
+  transform-origin: 60px 60px;
+  width: 60px;
+}
+
+.LoadingComponent__line {
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.75);
+  height: 120px;
+  width: 120px;
+}
+
+.LoadingComponent__symbol {
+  color: rgba(255, 255, 255, 0.05);
+  font-size: 50px;
+  font-weight: 400;
+  text-align: center;
+}
+
+#loaderSvg {
+  animation: inAndOut 1.87s infinite ease-in-out reverse;
+  position: relative;
+  z-index: 2;
+  transform-origin: center;
+  position: relative;
+}
+
+#loaderSvg tspan {
+  fill: transparent;
+	stroke: #fff;
+	stroke-width: 1px;
+	stroke-dasharray: 100;
+	stroke-dashoffset: 1000;
+  animation: 
+    logoStroke 4.75s infinite linear reverse,
+    logoStrokeFill 4.75s infinite cubic-bezier(0.445, 0.050, 0.550, 0.950) .187s reverse;
+  transform-origin: center;
+}
+
+@keyframes logoStroke {
+  to {
+    stroke-dashoffset: 400;
+  }
+}
+
+@keyframes logoStrokeFill {
+  from {
+    stroke: rgba(255, 255, 255, 0);
+    fill: rgba(255, 255, 255, 1);
+  }
+  to {
+    stroke: rgba(255, 255, 255, .84);
+    fill: rgba(255, 255, 255, 0);
+  }
+}
+
+@keyframes inAndOut {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: center;
+  }
+  25% {
+    opacity: .25;
+    transform: scale(1.75);
+    transform-origin: center;
+  }
+  50% {
+    opacity: .5;
+    transform: scale(1.5);
+    transform-origin: center;
+  }
+  75% {
+    opacity: 1;
+    transform: scale(2);
+    transform-origin: center;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+    transform-origin: center;
+  }
+}
+
+#text tspan {
+  &:nth-child(1) {
+    fill: rgba(255, 255, 255, .95);
+    font-family: 'Dosis', sans-serif;
+    font-size: 32px;
+  }
+  &:nth-child(2) {
+    fill: rgba(255, 255, 255, .95);
+    font-family: 'Dosis', sans-serif;
+    font-size: 56px;
+  }
+  &:nth-child(3) {
+    fill: rgba(255, 255, 255, .95);
+    font-family: 'Dosis', sans-serif;
+    font-size: 40px;
+  }
+  &:nth-child(4) {
+    fill: rgba(255, 255, 255, .95);
+    font-family: 'Dosis', sans-serif;
+    font-size: 56px;
+  }
+}

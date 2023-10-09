@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import TextScrambler from '../../components/TextScambler/TextScrambler';
 import { useParams } from 'react-router-dom';
 import apiUrl from '../../config';
-
+import Loader from '../../components/Loader/Loader'
 import styles from './BlogPost.module.scss';
 import ScrollBanner from '../../components/ScrollBanner';
 
@@ -18,7 +18,7 @@ const BlogPost = () => {
     }, [id]);
 
     if (!blogPost) {
-        return <div>Loading...</div>;
+        return <Loader />;
     }
 
     return (
