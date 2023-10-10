@@ -406,6 +406,6 @@ button {
     height: auto;
     padding: 4px;
     & svg {
-        height: 13px;
+        height: 13px !important;
     }
 }
