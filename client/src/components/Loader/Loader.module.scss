@@ -7,9 +7,26 @@
   }
 }
 
+@-webkit-keyframes logoStroke {
+  to {
+    stroke-dashoffset: 400;
+  }
+}
+
 @keyframes logoStroke {
   to {
     stroke-dashoffset: 400;
+  }
+}
+
+@-webkit-keyframes logoStrokeFill {
+  from {
+    stroke: rgba(255, 255, 255, 0);
+    fill: rgba(255, 255, 255, 1);
+  }
+  to {
+    stroke: rgba(255, 255, 255, 0.84);
+    fill: rgba(255, 255, 255, 0);
   }
 }
 
@@ -78,6 +95,9 @@
     background: transparent;
     opacity: 0;
     visibility: hidden;
+    -webkit-transition: opacity 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53),
+      visibility 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53),
+      background 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53);
     transition: opacity 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53),
       visibility 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53),
       background 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53);
@@ -129,9 +149,11 @@
 .Loader svg {
   -webkit-backface-visibility: hidden;
   -webkit-animation: inAndOut 1.87s infinite ease-in-out reverse;
+  animation: inAndOut 1.87s infinite ease-in-out reverse;
   position: relative;
   z-index: 2;
   -webkit-transform-origin: center;
+  transform-origin: center;
   top: 16px;
   left: 10px;
 }
@@ -142,6 +164,9 @@
   stroke-width: 1px;
   stroke-dasharray: 100;
   stroke-dashoffset: 1000;
+  -webkit-animation: logoStroke 4.75s infinite linear reverse,
+    logoStrokeFill 4.75s infinite cubic-bezier(0.445, 0.05, 0.55, 0.95) 0.187s
+      reverse;
   animation: logoStroke 4.75s infinite linear reverse,
     logoStrokeFill 4.75s infinite cubic-bezier(0.445, 0.05, 0.55, 0.95) 0.187s
       reverse;
