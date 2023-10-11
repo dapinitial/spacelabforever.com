@@ -1,7 +1,5 @@
 import React from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { useContext } from "react";
-import { AuthContext } from "../../../context/AuthProvider";
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import useSignout from '../../../hooks/useSignout';
 import styles from './NavBar.module.scss';
@@ -15,6 +13,7 @@ const ROLES = {
 const NavBar = () => {
     const auth = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
     const signout = useSignout();
 
     const signOut = async () => {
@@ -55,18 +54,52 @@ const NavBar = () => {
         );
     };
 
+    const activeLinkIndex = navLinks.findIndex(link => link.path === location.pathname);
+    const shouldRenderLink = (link) => {
+        if (link.displayName === 'Sign In' || link.displayName === 'Training' || link.displayName === 'Contact' || link.displayName === 'Home') {
+            return true;
+        }
+        if (auth?.roles.some(role => link.allowedRoles.includes(role))) {
+            return true;
+        }
+        return false;
+    }
+
+    let effectiveIndex = 0;  // counter for rendered elements
+    let currentIndex = -1;   // store the effective index of the active link
+
+    const renderedLinks = navLinks.map((link, index) => {
+        if (shouldRenderLink(link)) {
+            const isCurrentPath = location.pathname === link.path;
+            if (isCurrentPath) {
+                currentIndex = effectiveIndex; // update the current index if this is the active link
+            }
+            effectiveIndex++;  // increment for every rendered element
+
+            return (
+                <li className={`${styles.nav__link} ${isCurrentPath ? styles.active : ''}`} key={link.path.replace(/\//g, '-').replace(/^-/, '')}>
+                    <Link className={`${isCurrentPath ? styles.active : ''}`} to={link.path} onClick={link.action ? (e) => { e.preventDefault(); link.action(); } : null}>
+                        {link.displayName}
+                    </Link>
+                </li>
+            );
+        }
+        return null;  // return null for non-rendered elements
+    });
+
+    const computeBarTop = (index) => {
+        const baseHeight = 70;
+        return `${index * baseHeight}px`;
+    };
+
+    console.log("Current Path:", location.pathname);
+    console.log("Active Link Index:", activeLinkIndex);
+
     return (
         <nav className={styles.NavBar}>
-            <ul>
-                {navLinks.map(link => (
-                    (link.displayName === 'Sign In' || link.displayName === 'Training' || link.displayName === 'Contact' || link.displayName === 'Home' || auth?.roles.some(role => link.allowedRoles.includes(role))) && (
-                        <li key={link.path.replace(/\//g, '-').replace(/^-/, '')}>
-                            <Link to={link.path} onClick={link.action ? (e) => { e.preventDefault(); link.action(); } : null}>
-                                {link.displayName}
-                            </Link>
-                        </li>
-                    )
-                ))}
+            <ul className={styles.nav}>
+                {renderedLinks}
+                <div className={`${styles.nav__bar}`} style={{ top: computeBarTop(currentIndex) }}></div>
             </ul>
         </nav>
     );

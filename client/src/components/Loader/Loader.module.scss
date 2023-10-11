@@ -7,6 +7,51 @@
   }
 }
 
+@keyframes logoStroke {
+  to {
+    stroke-dashoffset: 400;
+  }
+}
+
+@keyframes logoStrokeFill {
+  from {
+    stroke: rgba(255, 255, 255, 0);
+    fill: rgba(255, 255, 255, 1);
+  }
+  to {
+    stroke: rgba(255, 255, 255, .84);
+    fill: rgba(255, 255, 255, 0);
+  }
+}
+
+@keyframes inAndOut {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: center;
+  }
+  25% {
+    opacity: .25;
+    transform: scale(1.75);
+    transform-origin: center;
+  }
+  50% {
+    opacity: .5;
+    transform: scale(1.5);
+    transform-origin: center;
+  }
+  75% {
+    opacity: 1;
+    transform: scale(2);
+    transform-origin: center;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+    transform-origin: center;
+  }
+}
+
 .LoadingComponent__circle, 
 .LoadingComponent__circleInner, 
 .LoadingComponent__lineMask, 
@@ -79,15 +124,16 @@
   text-align: center;
 }
 
-#loaderSvg {
-  animation: inAndOut 1.87s infinite ease-in-out reverse;
+.Loader svg {
+  -webkit-animation: inAndOut 1.87s infinite ease-in-out reverse;
   position: relative;
   z-index: 2;
-  transform-origin: center;
-  position: relative;
+  -webkit-transform-origin: center;
+  top: 16px;
+  left: 10px;
 }
 
-#loaderSvg tspan {
+.tspanStyles tspan {
   fill: transparent;
 	stroke: #fff;
 	stroke-width: 1px;
@@ -99,52 +145,7 @@
   transform-origin: center;
 }
 
-@keyframes logoStroke {
-  to {
-    stroke-dashoffset: 400;
-  }
-}
-
-@keyframes logoStrokeFill {
-  from {
-    stroke: rgba(255, 255, 255, 0);
-    fill: rgba(255, 255, 255, 1);
-  }
-  to {
-    stroke: rgba(255, 255, 255, .84);
-    fill: rgba(255, 255, 255, 0);
-  }
-}
-
-@keyframes inAndOut {
-  0% {
-    opacity: 0;
-    transform: scale(0);
-    transform-origin: center;
-  }
-  25% {
-    opacity: .25;
-    transform: scale(1.75);
-    transform-origin: center;
-  }
-  50% {
-    opacity: .5;
-    transform: scale(1.5);
-    transform-origin: center;
-  }
-  75% {
-    opacity: 1;
-    transform: scale(2);
-    transform-origin: center;
-  }
-  100% {
-    opacity: 0;
-    transform: scale(1);
-    transform-origin: center;
-  }
-}
-
-#text tspan {
+.tspanStyles tspan {
   &:nth-child(1) {
     fill: rgba(255, 255, 255, .95);
     font-family: 'Dosis', sans-serif;

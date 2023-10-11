@@ -1,22 +1,62 @@
+$hover: rgba(0, 0, 0, 0.4);
+
 .NavBar {
-    position: fixed;
-    top: 0;
-    right: 16px;
-    z-index: 1;
+  position: fixed;
+  top: 2px;
+  right: 2px;
+  z-index: 1;
 
-    ul {
-        li a {
-            cursor: 'pointer';
-            display: block;
-            padding: 10px;
-            font-family: 'Dosis', sans-serif;
-            font-size: 12px;
-            text-transform: uppercase;
-            text-align: right;
+  .nav {
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.15);
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    box-shadow: 0 10px 6px -8px rgba($hover, 0.15);
 
-            &:hover {
-                background: rgba(255, 255, 255, .2);
-            }
-        }
+    &__link {
+      flex: 1;
+      font-size: 13px;
+      font-weight: 100;
+      padding: 20px;
+      list-style: none;
+      text-align: center;
+      position: relative;
+      transition: 0.5s ease;
+      cursor: pointer;
+      user-select: none;
+
+      &:first-of-type {
+        padding-top: 20px;
+      }
+      &:last-of-type {
+        padding-bottom: 40px;
+      }
+
+      & a:hover {
+        color: #7f6ed2;
+        //background: rgba(255, 255, 255, .2);
+      }
+
+      & a {
+        color: #c3b7ff;
+      }
+
+      & .active {
+        color: #fff;
+        // other styles for active link can go here
+      }
     }
+    &__bar {
+      top: 0;
+      right: 0;
+      position: absolute;
+      background: rgba(255, 255, 255, 0.84);
+      width: 5px;
+      height: 50px;
+      transition: 0.35s cubic-bezier(0.32, 1.4, 0.13, 1.4);
+    }
+  }
 }
