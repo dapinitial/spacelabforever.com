@@ -11,7 +11,7 @@ Persisting to CosmosDB (soon to be Azure table for cost reduction).
 -  Live YMCA pools and group fitness classes displayed via API
 
 ## TODO:
-- [ ] Finish securing the auth mechanisms
+- [X] ~~Finish securing the auth mechanisms~~
 - [ ] Move Python Sensors, CMS, Blog, User Auth, etc over to Azure Tables instead of ComosDB
 - [ ] Replace create-react-app with webpack and introduce TypeScript
 - [ ] Custom TypeScript SCSS modules using sass instead of dart-sass
