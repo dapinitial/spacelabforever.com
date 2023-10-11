@@ -19,7 +19,7 @@
     fill: rgba(255, 255, 255, 1);
   }
   to {
-    stroke: rgba(255, 255, 255, .84);
+    stroke: rgba(255, 255, 255, 0.84);
     fill: rgba(255, 255, 255, 0);
   }
 }
@@ -31,12 +31,12 @@
     transform-origin: center;
   }
   25% {
-    opacity: .25;
+    opacity: 0.25;
     transform: scale(1.75);
     transform-origin: center;
   }
   50% {
-    opacity: .5;
+    opacity: 0.5;
     transform: scale(1.5);
     transform-origin: center;
   }
@@ -52,9 +52,9 @@
   }
 }
 
-.LoadingComponent__circle, 
-.LoadingComponent__circleInner, 
-.LoadingComponent__lineMask, 
+.LoadingComponent__circle,
+.LoadingComponent__circleInner,
+.LoadingComponent__lineMask,
 .LoadingComponent__symbol {
   position: absolute;
   top: 50%;
@@ -78,8 +78,8 @@
     background: transparent;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53), 
-      visibility 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53), 
+    transition: opacity 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53),
+      visibility 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53),
       background 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53);
   }
 }
@@ -93,6 +93,7 @@
 }
 
 .LoadingComponent__circleInner {
+  shape-rendering: geometricPrecision;
   height: 120px;
   width: 120px;
   border-radius: 50%;
@@ -101,6 +102,7 @@
 }
 
 .LoadingComponent__lineMask {
+  shape-rendering: geometricPrecision;
   animation: rotate-circle 1.2s infinite linear;
   height: 120px;
   margin-left: -60px;
@@ -125,6 +127,7 @@
 }
 
 .Loader svg {
+  -webkit-backface-visibility: hidden;
   -webkit-animation: inAndOut 1.87s infinite ease-in-out reverse;
   position: relative;
   z-index: 2;
@@ -135,35 +138,35 @@
 
 .tspanStyles tspan {
   fill: transparent;
-	stroke: #fff;
-	stroke-width: 1px;
-	stroke-dasharray: 100;
-	stroke-dashoffset: 1000;
-  animation: 
-    logoStroke 4.75s infinite linear reverse,
-    logoStrokeFill 4.75s infinite cubic-bezier(0.445, 0.050, 0.550, 0.950) .187s reverse;
+  stroke: #fff;
+  stroke-width: 1px;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 1000;
+  animation: logoStroke 4.75s infinite linear reverse,
+    logoStrokeFill 4.75s infinite cubic-bezier(0.445, 0.05, 0.55, 0.95) 0.187s
+      reverse;
   transform-origin: center;
 }
 
 .tspanStyles tspan {
   &:nth-child(1) {
-    fill: rgba(255, 255, 255, .95);
-    font-family: 'Dosis', sans-serif;
+    fill: rgba(255, 255, 255, 0.95);
+    font-family: "Dosis", sans-serif;
     font-size: 32px;
   }
   &:nth-child(2) {
-    fill: rgba(255, 255, 255, .95);
-    font-family: 'Dosis', sans-serif;
+    fill: rgba(255, 255, 255, 0.95);
+    font-family: "Dosis", sans-serif;
     font-size: 56px;
   }
   &:nth-child(3) {
-    fill: rgba(255, 255, 255, .95);
-    font-family: 'Dosis', sans-serif;
+    fill: rgba(255, 255, 255, 0.95);
+    font-family: "Dosis", sans-serif;
     font-size: 40px;
   }
   &:nth-child(4) {
-    fill: rgba(255, 255, 255, .95);
-    font-family: 'Dosis', sans-serif;
+    fill: rgba(255, 255, 255, 0.95);
+    font-family: "Dosis", sans-serif;
     font-size: 56px;
   }
 }
