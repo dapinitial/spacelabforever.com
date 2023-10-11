@@ -1,17 +1,23 @@
+import React, { useState } from 'react';
 import { Link } from "react-router-dom"
 import Users from "../../components/Users/Users"
+import styles from './Admin.module.scss';
+
+import TextScrambler from '../../components/TextScambler/TextScrambler';
+import Loader from '../../components/Loader/Loader';
 
 const Admin = () => {
+    const [isLoading, setIsLoading] = useState(false);
+    let herophrases = ['admin'];
+
     return (
-        <section>
-            <h1>Admins Page</h1>
-            <br />
-            <Users />
-            <br />
-            <div className="flexGrow">
-                <Link to="/">Home</Link>
-            </div>
-        </section>
+        isLoading ? <Loader /> :
+            <section className="container">
+                <div>
+                    <h1 className="hero subpage"><TextScrambler phrases={herophrases} /></h1>
+                </div>
+                <Users />
+            </section>
     )
 }
 

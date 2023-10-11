@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import apiUrl from '../../config';
 import styles from './Guestbook.module.scss';
+import TextScrambler from '../../components/TextScambler/TextScrambler';
+import Loader from '../../components/Loader/Loader';
 
 const Guestbook = () => {
     const [messages, setMessages] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    let herophrases = ['guestbook', 'visitor log'];
 
     useEffect(() => {
         fetch(`${apiUrl}/approvals`)
@@ -111,40 +115,44 @@ const Guestbook = () => {
     };
 
     return (
-        <div className="container">
-            {errorMessage && <p>Error: {errorMessage}</p>}
-            <table className={styles.approvalstable}>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Message</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {messages.map((message) => (
-                        <tr key={message.id}>
-                            <td>{message.name}</td>
-                            <td>{message.email}</td>
-                            <td>{message.message}</td>
-                            <td className={styles.status}><div>{message.status}</div></td>
-                            <td>
-                                {message.status === 'pending' && (
-                                    <>
-                                        <button onClick={() => handleApprove(message.id)}>Approve</button>
-                                        <button onClick={() => handleReject(message.id)}>Reject</button>
-                                    </>
-                                )}
-                                <button onClick={() => handleDelete(message.id)}>Delete</button>
-                            </td>
+        isLoading ? <Loader /> :
+            <section className="container">
+                <div>
+                    <h1 className="hero subpage"><TextScrambler phrases={herophrases} /></h1>
+                </div>
+                {errorMessage && <p>Error: {errorMessage}</p>}
+                <table className={styles.approvalstable}>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Message</th>
+                            <th>Status</th>
+                            <th>Actions</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
-            <button style={{ display: 'flex' }} onClick={() => handleDeleteAll()}>Delete All</button>
-        </div>
+                    </thead>
+                    <tbody>
+                        {messages.map((message) => (
+                            <tr key={message.id}>
+                                <td>{message.name}</td>
+                                <td>{message.email}</td>
+                                <td>{message.message}</td>
+                                <td className={styles.status}><div>{message.status}</div></td>
+                                <td>
+                                    {message.status === 'pending' && (
+                                        <>
+                                            <button onClick={() => handleApprove(message.id)}>Approve</button>
+                                            <button onClick={() => handleReject(message.id)}>Reject</button>
+                                        </>
+                                    )}
+                                    <button onClick={() => handleDelete(message.id)}>Delete</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                <button style={{ display: 'flex' }} onClick={() => handleDeleteAll()}>Delete All</button>
+            </section>
     );
 };
 
