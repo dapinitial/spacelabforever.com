@@ -35,24 +35,10 @@ const NavBar = () => {
     ];
 
     if (auth?.roles.includes(ROLES.User)) {
-        navLinks.push({
-            path: '#',
-            displayName: 'Sign Out',
-            allowedRoles: [ROLES.User],
-            action: signOut
-        }
-        );
-    };
-
-    if (!auth || !auth.roles || auth.roles.length === 0) {
-        navLinks.push(
-            {
-                path: '/sign-in',
-                displayName: 'Sign In',
-                allowedRoles: []  // empty, because the display is based on the absence of roles
-            }
-        );
-    };
+        navLinks.push({ path: '#', displayName: 'Sign Out', allowedRoles: [ROLES.User], action: signOut });
+    } else {
+        navLinks.push({ path: '/sign-in', displayName: 'Sign In', allowedRoles: [] });
+    }
 
     const activeLinkIndex = navLinks.findIndex(link => link.path === location.pathname);
     const shouldRenderLink = (link) => {
@@ -65,16 +51,16 @@ const NavBar = () => {
         return false;
     }
 
-    let effectiveIndex = 0;  // counter for rendered elements
-    let currentIndex = -1;   // store the effective index of the active link
+    let effectiveIndex = 0;
+    let currentIndex = -1;
 
     const renderedLinks = navLinks.map((link, index) => {
         if (shouldRenderLink(link)) {
             const isCurrentPath = location.pathname === link.path;
             if (isCurrentPath) {
-                currentIndex = effectiveIndex; // update the current index if this is the active link
+                currentIndex = effectiveIndex;
             }
-            effectiveIndex++;  // increment for every rendered element
+            effectiveIndex++;
 
             return (
                 <li className={`${styles.nav__link} ${isCurrentPath ? styles.active : ''}`} key={link.path.replace(/\//g, '-').replace(/^-/, '')}>
@@ -84,16 +70,13 @@ const NavBar = () => {
                 </li>
             );
         }
-        return null;  // return null for non-rendered elements
+        return null;
     });
 
     const computeBarTop = (index) => {
         const baseHeight = 70;
         return `${index * baseHeight}px`;
     };
-
-    console.log("Current Path:", location.pathname);
-    console.log("Active Link Index:", activeLinkIndex);
 
     return (
         <nav className={styles.NavBar}>

@@ -9,7 +9,6 @@ $hover: rgba(0, 0, 0, 0.4);
   .nav {
     display: flex;
     flex-direction: column;
-    background: rgba(255, 255, 255, 0.15);
     position: relative;
     overflow: hidden;
     padding: 0;
@@ -37,7 +36,6 @@ $hover: rgba(0, 0, 0, 0.4);
 
       & a:hover {
         color: #7f6ed2;
-        //background: rgba(255, 255, 255, .2);
       }
 
       & a {
@@ -46,7 +44,6 @@ $hover: rgba(0, 0, 0, 0.4);
 
       & .active {
         color: #fff;
-        // other styles for active link can go here
       }
     }
     &__bar {
