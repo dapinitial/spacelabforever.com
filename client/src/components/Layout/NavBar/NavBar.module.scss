@@ -5,6 +5,10 @@ $hover: rgba(0, 0, 0, 0.4);
   top: 2px;
   right: 2px;
   z-index: 1;
+  background: rgba(255, 255, 255, 0.1);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom-left-radius: 8px;
+  backdrop-filter: blur(20px);
 
   .nav {
     display: flex;
