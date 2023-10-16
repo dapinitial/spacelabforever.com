@@ -118,7 +118,6 @@ function SignIn() {
                             {...userAttributes}
                             className={styles.inputText}
                         />
-
                         <label className={styles.label} htmlFor="password">Password:</label>
                         <input
                             type="password"
