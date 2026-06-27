@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import '../styles/shared.css';
+import '../styles/positioning.css';
+import content from '../content/positioning.html?raw';
+const title = "SuperAudio — Positioning & Brand";
+const description = "SuperAudio — positioning and brand voice. The one-line pitch, the five message pillars, what we say (and don't), and the antithesis test.";
+---
+
+<Base title={title} description={description}>
+  <Fragment set:html={content} />
+</Base>

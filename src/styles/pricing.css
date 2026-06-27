@@ -1,0 +1,40 @@
+/* Page-specific overlays */
+  .hero::before {
+    content: ""; position: absolute; top: -40%; right: -10%;
+    width: 70%; height: 180%;
+    background: radial-gradient(circle, rgba(255,106,61,0.10) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ""; position: absolute; bottom: -30%; left: -10%;
+    width: 60%; height: 140%;
+    background: radial-gradient(circle, rgba(255,186,109,0.06) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  /* SKU grid for the price defense section */
+  .sku-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin: 28px 0; }
+  .sku {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 28px;
+    display: flex; flex-direction: column;
+  }
+  .sku .sku-name { font-size: 13px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+  .sku .price {
+    font-size: 44px; font-weight: 800; letter-spacing: -0.025em;
+    margin: 8px 0 8px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+  }
+  .sku .role { font-size: 14px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.5; }
+  .sku .derive { font-size: 12.5px; color: var(--text); border-top: 1px solid var(--border); padding-top: 14px; line-height: 1.55; }
+  .sku .derive strong { color: var(--accent-2); font-weight: 600; }
+  /* Comparison axis: a "ruler" of competitor prices */
+  .ruler { position: relative; margin: 32px 0 24px; padding: 60px 0 28px; }
+  .ruler-line { position: absolute; left: 0; right: 0; top: 78px; height: 1px; background: var(--border); }
+  .ruler-tick { position: absolute; top: 70px; width: 1px; height: 16px; background: var(--text-dim); }
+  .ruler-label { position: absolute; top: 24px; transform: translateX(-50%); white-space: nowrap; text-align: center; font-size: 12px; color: var(--text-muted); }
+  .ruler-label strong { display: block; color: var(--text); font-size: 13px; }
+  .ruler-label.us strong { color: var(--accent); }
+  .ruler-pos { position: absolute; top: 100px; transform: translateX(-50%); font-size: 12px; color: var(--text-dim); font-variant-numeric: tabular-nums; }
+  @media (max-width: 880px) { .ruler { display: none; } /* hide the visual ruler on small screens; tables below convey the same info */ }

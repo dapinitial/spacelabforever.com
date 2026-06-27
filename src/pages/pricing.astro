@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import '../styles/shared.css';
+import '../styles/pricing.css';
+import content from '../content/pricing.html?raw';
+const title = "SuperAudio — Pricing Derivation";
+const description = "SuperAudio — how every price point ($19 / $5 / $59 / $79 / $249) was derived. Sensitivity, bundling, international, and what we will never sell.";
+---
+
+<Base title={title} description={description}>
+  <Fragment set:html={content} />
+</Base>

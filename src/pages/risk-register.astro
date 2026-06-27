@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import '../styles/shared.css';
+import '../styles/risk-register.css';
+import content from '../content/risk-register.html?raw';
+const title = "SuperAudio — Risk Register";
+const description = "SuperAudio — honest risk register. Legal, technical, market, and operational risks. Likelihood, impact, mitigation, trigger-to-act per row.";
+---
+
+<Base title={title} description={description}>
+  <Fragment set:html={content} />
+</Base>

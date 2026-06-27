@@ -1,0 +1,94 @@
+/* Page-specific overlays */
+  .hero::before {
+    content: ""; position: absolute; top: -30%; right: -15%;
+    width: 60%; height: 160%;
+    background: radial-gradient(circle, rgba(244,114,182,0.08) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ""; position: absolute; bottom: -20%; left: -10%;
+    width: 60%; height: 130%;
+    background: radial-gradient(circle, rgba(255,106,61,0.07) 0%, transparent 55%);
+    pointer-events: none;
+  }
+
+  /* The three pitch lengths, displayed side by side */
+  .pitch-stack { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 28px 0; }
+  .pitch {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 24px;
+  }
+  .pitch .len { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .pitch p { font-size: 16px; color: var(--text); line-height: 1.5; margin: 0; }
+  .pitch.short p { font-size: 22px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; }
+  .pitch.medium p { font-size: 17px; font-weight: 500; }
+  .pitch.long p { font-size: 14.5px; color: var(--text-muted); }
+  @media (max-width: 880px) { .pitch-stack { grid-template-columns: 1fr; } }
+
+  /* Voice: do/don't grids */
+  .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+  .voice {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 24px;
+  }
+  .voice.do { border-left: 3px solid var(--good); }
+  .voice.dont { border-left: 3px solid var(--bad); }
+  .voice h4 { margin-top: 0; }
+  .voice.do h4 { color: var(--good); }
+  .voice.dont h4 { color: var(--bad); }
+  .voice ul { margin: 0; padding-left: 18px; }
+  .voice li { font-size: 14px; color: var(--text-muted); }
+  .voice li strong { color: var(--text); }
+  @media (max-width: 720px) { .voice-grid { grid-template-columns: 1fr; } }
+
+  /* Pillar cards */
+  .pillar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin: 28px 0; }
+  .pillar {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 24px;
+    transition: border-color 0.15s, transform 0.15s;
+  }
+  .pillar:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .pillar .num {
+    display: inline-block; width: 32px; height: 32px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: var(--bg); font-weight: 800; font-size: 14px;
+    border-radius: 8px; line-height: 32px; text-align: center;
+    margin-bottom: 12px;
+  }
+  .pillar .headline { font-size: 18px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.01em; }
+  .pillar .body { font-size: 13.5px; color: var(--text-muted); line-height: 1.55; }
+
+  /* Antithesis pairs */
+  .anti-grid { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 24px 0; }
+  .anti {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 22px 26px;
+    display: grid; grid-template-columns: 1fr 28px 1fr; gap: 24px; align-items: center;
+  }
+  .anti .us { color: var(--accent-2); font-weight: 600; }
+  .anti .them { color: var(--text-muted); }
+  .anti .arrow { color: var(--text-dim); font-size: 18px; text-align: center; }
+  .anti strong { color: var(--text); display: block; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; font-weight: 700; }
+  @media (max-width: 640px) { .anti { grid-template-columns: 1fr; } .anti .arrow { display: none; } }
+
+  /* Test cards */
+  .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
+  .test {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 22px;
+  }
+  .test .label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); margin-bottom: 10px; }
+  .test .q { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 10px; line-height: 1.4; }
+  .test .why { font-size: 13px; color: var(--text-muted); }
+  @media (max-width: 720px) { .test-grid { grid-template-columns: 1fr; } }
+
+  /* Color swatches */
+  .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 16px 0; }
+  .swatch {
+    border-radius: 8px; padding: 16px 14px; border: 1px solid var(--border);
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .swatch .name { font-size: 12px; color: var(--text); font-weight: 600; }
+  .swatch .hex { font-size: 11px; color: var(--text-muted); font-family: "SF Mono", Menlo, monospace; }
+  @media (max-width: 720px) { .swatches { grid-template-columns: repeat(2, 1fr); } }

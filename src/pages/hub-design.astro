@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import '../styles/shared.css';
+import '../styles/hub-design.css';
+import content from '../content/hub-design.html?raw';
+const title = "SuperAudio — Hub Design";
+const description = "SuperAudio — Hub Stick (M13) and Hub Pro (M14) hardware design vision, sizing analysis, design gaps, and manufacturing strategy. Forward-looking architectural notes for the hardware SKUs.";
+---
+
+<Base title={title} description={description}>
+  <Fragment set:html={content} />
+</Base>

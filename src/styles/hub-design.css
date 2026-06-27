@@ -1,0 +1,106 @@
+/* Page-specific overlays — cyan-tinted to distinguish "future" from "shipped" */
+  .hero::before {
+    content: ""; position: absolute; top: -30%; right: -15%;
+    width: 60%; height: 160%;
+    background: radial-gradient(circle, rgba(103,232,249,0.06) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ""; position: absolute; bottom: -20%; left: -10%;
+    width: 60%; height: 130%;
+    background: radial-gradient(circle, rgba(255,106,61,0.06) 0%, transparent 55%);
+    pointer-events: none;
+  }
+
+  /* Two-up product cards (Hub Stick + Hub Pro) */
+  .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 28px 0; }
+  .product {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 28px;
+    position: relative;
+  }
+  .product.stick { border-top: 3px solid var(--accent); }
+  .product.pro { border-top: 3px solid var(--cyan); }
+  .product .sku { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+  .product .name { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; margin: 4px 0 2px; }
+  .product .stick .name { color: var(--accent); }
+  .product .pro .name { color: var(--cyan); }
+  .product .price { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 16px; }
+  .product .price .target { color: var(--text-muted); font-weight: 400; }
+  .product h4 { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-2); margin: 18px 0 6px; }
+  .product ul { margin: 0 0 12px; padding-left: 18px; }
+  .product li { font-size: 13.5px; color: var(--text-muted); line-height: 1.55; margin-bottom: 4px; }
+  .product li strong { color: var(--text); }
+  @media (max-width: 880px) { .product-grid { grid-template-columns: 1fr; } }
+
+  /* Magic-moment quote callout */
+  .magic {
+    background: linear-gradient(135deg, rgba(103,232,249,0.06), rgba(255,106,61,0.04));
+    border: 1px solid var(--border-bright);
+    border-left: 4px solid var(--cyan);
+    border-radius: 12px; padding: 28px 32px; margin: 24px 0;
+  }
+  .magic p { font-size: 22px; font-weight: 600; line-height: 1.4; color: var(--text); margin: 0 0 14px; letter-spacing: -0.015em; }
+  .magic p:last-child { margin-bottom: 0; }
+  .magic em { color: var(--cyan); font-style: normal; }
+  .magic .caption { font-size: 13px; color: var(--text-muted); margin-top: 18px; }
+
+  /* CEC table */
+  .remote-table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; }
+  .remote-table th { text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); padding: 12px 14px; border-bottom: 1px solid var(--border); }
+  .remote-table td { font-size: 14px; color: var(--text); padding: 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .remote-table td:first-child { font-weight: 600; color: var(--accent); white-space: nowrap; }
+  .remote-table td:last-child { color: var(--text-muted); }
+
+  /* Gap tiers */
+  .gap-stack { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 24px 0; }
+  .gap {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px 22px;
+    display: grid; grid-template-columns: 110px 1fr; gap: 18px; align-items: start;
+  }
+  .gap.tier1 { border-left: 3px solid var(--bad); }
+  .gap.tier2 { border-left: 3px solid var(--warn); }
+  .gap.tier3 { border-left: 3px solid var(--good); }
+  .gap.tier4 { border-left: 3px solid var(--text-dim); }
+  .gap .label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+  .gap.tier1 .label { color: var(--bad); }
+  .gap.tier2 .label { color: var(--warn); }
+  .gap.tier3 .label { color: var(--good); }
+  .gap.tier4 .label { color: var(--text-dim); }
+  .gap .body h5 { font-size: 15px; font-weight: 700; color: var(--text); margin: 0 0 6px; }
+  .gap .body p { font-size: 13px; color: var(--text-muted); margin: 0; line-height: 1.55; }
+  @media (max-width: 720px) { .gap { grid-template-columns: 1fr; } }
+
+  /* Manufacturing country table */
+  .mfg-table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; }
+  .mfg-table th { text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); padding: 12px 14px; border-bottom: 1px solid var(--border); }
+  .mfg-table td { font-size: 13.5px; color: var(--text); padding: 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .mfg-table td:first-child { font-weight: 700; }
+  .mfg-table .pick { background: rgba(255,106,61,0.04); }
+  .mfg-table .pick td:first-child { color: var(--accent); }
+
+  /* Sizing comparison */
+  .sizing-table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; }
+  .sizing-table th { text-align: left; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); padding: 12px 10px; border-bottom: 1px solid var(--border); }
+  .sizing-table td { font-size: 13px; color: var(--text); padding: 12px 10px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .sizing-table td:first-child { font-weight: 700; }
+  .sizing-table .pick-stick { background: rgba(255,106,61,0.04); }
+  .sizing-table .pick-pro { background: rgba(103,232,249,0.04); }
+  .sizing-table .pick-stick td:first-child { color: var(--accent); }
+  .sizing-table .pick-pro td:first-child { color: var(--cyan); }
+  .check { color: var(--good); font-weight: 700; }
+  .warn { color: var(--warn); font-weight: 700; }
+  .nope { color: var(--bad); font-weight: 700; }
+
+  /* Timeline strip */
+  .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 24px 0; }
+  .tstep {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px 20px;
+  }
+  .tstep .when { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-2); margin-bottom: 6px; }
+  .tstep .what { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .tstep .desc { font-size: 12px; color: var(--text-muted); }
+  @media (max-width: 880px) { .timeline { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .timeline { grid-template-columns: 1fr; } }

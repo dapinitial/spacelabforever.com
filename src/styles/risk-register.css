@@ -1,0 +1,51 @@
+/* Page-specific overlays — danger-tinted hero */
+  .hero::before {
+    content: ""; position: absolute; top: -40%; right: -10%;
+    width: 70%; height: 180%;
+    background: radial-gradient(circle, rgba(248,113,113,0.10) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ""; position: absolute; bottom: -30%; left: -10%;
+    width: 60%; height: 140%;
+    background: radial-gradient(circle, rgba(251,191,36,0.06) 0%, transparent 55%);
+    pointer-events: none;
+  }
+
+  /* Heat-map legend */
+  .legend { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 24px 0 32px; }
+  .legend .cell {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 16px;
+    display: flex; align-items: flex-start; gap: 12px;
+  }
+  .legend .dot { width: 12px; height: 12px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+  .legend .dot.high { background: var(--bad); box-shadow: 0 0 0 4px rgba(248,113,113,0.18); }
+  .legend .dot.medium { background: var(--warn); box-shadow: 0 0 0 4px rgba(251,191,36,0.18); }
+  .legend .dot.low { background: var(--good); box-shadow: 0 0 0 4px rgba(74,222,128,0.18); }
+  .legend .label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+  .legend .desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+  /* Risk row table — overridden to be denser than the default table */
+  .risk-table { margin: 16px 0 32px; }
+  .risk-table th { font-size: 10.5px; }
+  .risk-table td { font-size: 13px; }
+  .risk-table .sev { font-weight: 700; text-transform: uppercase; font-size: 11px; letter-spacing: 0.06em; }
+  .risk-table .sev.high { color: var(--bad); }
+  .risk-table .sev.medium { color: var(--warn); }
+  .risk-table .sev.low { color: var(--good); }
+  .risk-table .mit { color: var(--text); font-size: 12.5px; }
+  .risk-table .trigger { color: var(--cyan); font-size: 12.5px; font-style: italic; }
+
+  /* Watch list — flat list */
+  .watch { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 24px 0; }
+  .watch-item {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-left: 3px solid var(--cyan);
+    border-radius: 8px; padding: 16px 20px;
+    display: grid; grid-template-columns: 1fr 100px; gap: 16px; align-items: center;
+  }
+  .watch-item .signal { font-size: 14.5px; color: var(--text); }
+  .watch-item .signal strong { color: var(--cyan); }
+  .watch-item .cadence { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; text-align: right; }
+  @media (max-width: 640px) { .watch-item { grid-template-columns: 1fr; } .watch-item .cadence { text-align: left; } }
