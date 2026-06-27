@@ -1,0 +1,31 @@
+---
+// Canonical top nav — one source of truth for all pages (replaces the
+// per-file topbar/topnav copies that had started to drift). Auto-highlights
+// the current route from the URL.
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const links = [
+  { href: '/',                      label: 'Product' },
+  { href: '/case-study',            label: 'Case Study' },
+  { href: '/pricing',               label: 'Pricing' },
+  { href: '/hub-design',            label: 'Hub Design' },
+  { sep: true },
+  { href: '/positioning',           label: 'Brand' },
+  { href: '/competitive-landscape', label: 'Landscape' },
+  { href: '/risk-register',         label: 'Risks' },
+  { href: '/reactive-discovery',    label: 'Build Log' },
+];
+---
+
+<nav class="topbar">
+  <div class="wrap">
+    <a href="/" class="brand">SuperAudio</a>
+    <div class="links">
+      {links.map((l) =>
+        l.sep
+          ? <span class="nav-sep">·</span>
+          : <a href={l.href} class={path === l.href ? 'current' : ''}>{l.label}</a>
+      )}
+    </div>
+    <a href="/#waitlist" class="cta">Get notified</a>
+  </div>
+</nav>

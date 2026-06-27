@@ -1,0 +1,88 @@
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased;background:#0c0c0c;color:#fff}
+img,video{display:block;max-width:100%}
+em{font-style:italic}
+.studio-line{display:block;will-change:transform}
+[data-block]{display:block}
+/* Overlap consecutive sections 1px so no sub-pixel sliver of the page bg ever shows between them. */
+[data-block]+[data-block]{margin-top:-1px}
+/* Accordion (CSS-only <details>): hide native marker, rotate + → × when open. */
+.studio-acc summary::-webkit-details-marker{display:none}
+.studio-acc summary{outline:none}
+.studio-acc-icon{transition:transform .3s ease}
+.studio-acc[open] .studio-acc-icon{transform:rotate(45deg)}
+/* Logo wall: muted by default, full presence on hover. */
+.studio-logo{opacity:.5;filter:grayscale(1);transition:opacity .3s ease,filter .3s ease}
+.studio-logo:hover{opacity:1;filter:grayscale(0)}
+/* CTA pill button: lifts on hover. */
+.studio-btn{display:inline-block;text-decoration:none;border-radius:100px;padding:18px 42px;font-weight:600;font-size:16px;letter-spacing:.01em;transition:transform .35s ease,box-shadow .35s ease}
+.studio-btn:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(0,0,0,.28)}
+.studio-btn--outline:hover{box-shadow:none;transform:translateY(-3px)}
+.studio-btn--ghost{padding-left:6px;padding-right:6px}
+.studio-btn--ghost:hover{transform:translateX(6px);box-shadow:none}
+/* Content slider: hide scrollbar (native scroll-snap remains). */
+.studio-slider{scrollbar-width:none;-ms-overflow-style:none}
+.studio-slider::-webkit-scrollbar{display:none}
+/* Infinity list: hover a row → reveal its image, nudge the title, dim the rest.
+   Rest-state lives here (NOT inline) so the :hover rules can actually override it. */
+.studio-ilimg{opacity:0;transform:translate(0,-50%) scale(.85) rotate(-4deg);transition:opacity .4s ease,transform .55s cubic-bezier(.2,.7,.2,1)}
+.studio-ilrow:hover .studio-ilimg{opacity:1;transform:translate(0,-50%) scale(1) rotate(0deg)}
+.studio-ilrow:hover .studio-iltitle{transform:translateX(26px)}
+.studio-il:hover .studio-ilrow:not(:hover) .studio-iltitle{opacity:.35}
+/* Tilt gallery: resting rotation straightens + lifts on hover (!important beats inline rotate). */
+.studio-tilt{transition:transform .55s cubic-bezier(.2,.7,.2,1)}
+.studio-tilt:hover{transform:rotate(0deg) scale(1.03)!important;position:relative;z-index:2}
+/* Portfolio grid: filter pills + tile hover zoom. */
+.studio-filter{cursor:pointer;background:transparent;border:1px solid rgba(127,127,127,.45);color:inherit;border-radius:100px;padding:9px 20px;font:600 13px/1 inherit;opacity:.65;transition:opacity .25s ease,background .25s ease,border-color .25s ease,color .25s ease}
+.studio-filter:hover{opacity:1}
+.studio-filter.is-active{opacity:1;background:var(--acc);border-color:var(--acc);color:#0c0c0c}
+.studio-projtile:hover img{transform:scale(1.05)}
+/* Team grid: portraits desaturated until hover. */
+.studio-member img{filter:grayscale(1);transition:filter .4s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.studio-member:hover img{filter:grayscale(0);transform:scale(1.04)}
+/* Panels: image zoom + subtitle slides open on hover. */
+.studio-panel img{transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.studio-panel:hover img{transform:scale(1.07)}
+.studio-panel-sub{max-height:0;opacity:0;overflow:hidden;margin-top:0;transition:max-height .45s ease,opacity .45s ease,margin-top .45s ease}
+.studio-panel:hover .studio-panel-sub{max-height:80px;opacity:.85;margin-top:8px}
+/* Hover-image text: a hot word floats a thumbnail above it on hover (rest-state here, not inline). */
+.studio-hotword{position:relative;cursor:pointer}
+.studio-hotimg{position:absolute;bottom:118%;left:50%;width:200px;aspect-ratio:4/3;object-fit:cover;border-radius:10px;box-shadow:0 20px 50px rgba(0,0,0,.35);opacity:0;transform:translate(-50%,8px) scale(.92);pointer-events:none;z-index:5;transition:opacity .35s ease,transform .45s cubic-bezier(.2,.7,.2,1)}
+.studio-hotword:hover .studio-hotimg{opacity:1;transform:translate(-50%,0) scale(1)}
+/* Video lightbox: poster play-button + CSS :target overlay. */
+.studio-lb-play{transition:transform .3s ease,background .3s ease}
+.studio-lb-trigger:hover .studio-lb-play{transform:translate(-50%,-50%) scale(1.08);background:#fff}
+.studio-lightbox{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .4s ease}
+.studio-lightbox:target{opacity:1;pointer-events:auto}
+.studio-lb-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.9)}
+.studio-lb-stage{position:relative;width:min(100%,1100px);aspect-ratio:16/9}
+.studio-lb-close{position:absolute;top:-46px;right:0;color:#fff;font-size:34px;line-height:1;text-decoration:none;opacity:.8}
+.studio-lb-close:hover{opacity:1}
+/* Data table: subtle row hover. */
+.studio-trow{transition:background .2s ease}
+.studio-trow:hover{background:rgba(127,127,127,.07)}
+/* Page chrome — preloader, intro reveal, back-to-top, magnetic cursor. */
+.studio-preloader{position:fixed;inset:0;z-index:99999;background:#0c0c0c;display:flex;align-items:center;justify-content:center;transition:opacity .6s ease,visibility .6s}
+.studio-preloader.is-done{opacity:0;visibility:hidden}
+.studio-preloader-bar{width:min(220px,40vw);height:2px;background:rgba(255,255,255,.16);overflow:hidden}
+.studio-preloader-bar span{display:block;height:100%;width:0;background:#fff;transition:width .3s ease}
+.studio-page{opacity:0;transform:translateY(14px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.studio-page.is-in{opacity:1;transform:none}
+.studio-totop{position:fixed;right:22px;bottom:22px;z-index:900;width:46px;height:46px;border-radius:50%;background:rgba(127,127,127,.18);backdrop-filter:blur(8px);color:#fff;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:18px;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .35s ease,transform .35s ease,background .25s ease;mix-blend-mode:difference}
+.studio-totop.is-on{opacity:1;transform:none;pointer-events:auto}
+.studio-cursor{position:fixed;top:0;left:0;width:34px;height:34px;border:1.5px solid rgba(255,255,255,.6);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .25s ease,height .25s ease,background .25s ease;mix-blend-mode:difference;will-change:transform;opacity:0}
+@media (hover:none),(pointer:coarse){.studio-cursor{display:none!important}}
+@media (prefers-reduced-motion:reduce){.studio-cursor{display:none!important}.studio-page{opacity:1!important;transform:none!important}}
+/* Responsive helpers — blocks stay mostly inline-styled; these handle stacking on mobile. */
+@media(max-width:760px){
+  .studio-pin-grid{grid-template-columns:1fr!important;gap:32px!important}
+  .studio-pin-sticky{position:static!important}
+  .studio-gallery-grid{grid-template-columns:repeat(2,1fr)!important}
+  .studio-frow{grid-template-columns:1fr!important;gap:8px!important}
+  .studio-tilt-grid{grid-template-columns:repeat(2,1fr)!important}
+  .studio-overlap-grid{grid-template-columns:1fr!important}
+  .studio-overlap-front{margin:-16% 0 0 auto!important;width:78%}
+  .studio-collage{grid-template-columns:repeat(2,1fr)!important;grid-auto-rows:clamp(120px,30vw,200px)!important}
+  .studio-team-grid{grid-template-columns:repeat(2,1fr)!important}
+}
