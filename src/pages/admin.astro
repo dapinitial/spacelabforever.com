@@ -1,0 +1,21 @@
+---
+import "../styles/admin.css";
+import Dashboard from "../components/Dashboard.jsx";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Internal dashboard — never indexed. -->
+    <meta name="robots" content="noindex, nofollow" />
+    <title>SpaceLab · admin</title>
+  </head>
+  <body>
+    <main class="admin-wrap">
+      <!-- Client-only React island: auth + data fetch happen in the browser. -->
+      <Dashboard client:only="react" />
+    </main>
+  </body>
+</html>

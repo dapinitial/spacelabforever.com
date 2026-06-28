@@ -1,0 +1,53 @@
+/* /admin dashboard — dark theme, matches the site palette. Behind Supabase Auth. */
+:root {
+  --bg: #0a0a0f; --card: #14141c; --card2: #1a1a24; --border: #23232e;
+  --text: #ececf1; --muted: #8a8a96; --accent: #ff6a3d; --cyan: #67e8f9; --ok: #4ade80;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text);
+  font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; }
+.admin-wrap { max-width: 1040px; margin: 0 auto; padding: 32px 20px 80px; }
+h1 { font-size: 1.4rem; margin: 0; }
+h2 { font-size: 0.95rem; margin: 0 0 14px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+.muted { color: var(--muted); }
+.err { color: #f87171; }
+
+/* login */
+.login { max-width: 340px; margin: 14vh auto 0; display: flex; flex-direction: column; gap: 12px;
+  background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+.login h1 { margin-bottom: 2px; }
+.login p { margin: 0 0 8px; }
+.login input { background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+  padding: 11px 13px; color: var(--text); font-size: 15px; }
+.login input:focus { outline: none; border-color: var(--accent); }
+.login button, .ghost { background: var(--accent); color: #fff; border: 0; border-radius: 10px;
+  padding: 11px 16px; font-weight: 600; cursor: pointer; }
+.login button:disabled { opacity: 0.6; cursor: default; }
+.ghost { background: transparent; border: 1px solid var(--border); color: var(--text); padding: 8px 14px; }
+
+/* dashboard */
+.dash-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 26px; }
+.kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 22px; }
+.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 18px; }
+.kpi-value { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; }
+.kpi-label { color: var(--muted); font-size: 0.85rem; margin-top: 2px; }
+.kpi-sub { color: var(--accent); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-bottom: 18px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+/* bars */
+.bars { display: flex; flex-direction: column; gap: 9px; }
+.bar-row { display: grid; grid-template-columns: 130px 1fr auto; gap: 12px; align-items: center; font-size: 0.88rem; }
+.bar-label { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar-track { background: var(--card2); border-radius: 6px; height: 10px; overflow: hidden; }
+.bar-fill { display: block; height: 100%; border-radius: 6px; background: var(--cyan); }
+.bar-fill.accent { background: linear-gradient(90deg, var(--accent), #ff9a3d); }
+.bar-num { color: var(--text); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* table */
+.tbl { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+.tbl th { text-align: left; color: var(--muted); font-weight: 600; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+.tbl td { padding: 9px 10px; border-bottom: 1px solid var(--border); }
+.tbl tr:last-child td { border-bottom: 0; }
+
+@media (max-width: 720px) { .kpis, .grid { grid-template-columns: 1fr 1fr; } .bar-row { grid-template-columns: 100px 1fr auto; } }
