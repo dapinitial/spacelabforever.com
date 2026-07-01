@@ -151,7 +151,7 @@ import Base from '../layouts/Base.astro';
 <section id="moat">
   <div class="wrap">
     <h2 data-animate="reveal">The thing nobody else does at <em>this price.</em></h2>
-    <p class="subhead" data-animate="fade-up">Multi-protocol streaming is table stakes. Cross-protocol room tuning, Sonos-native grouping, and device support that lives in the open? Not done anywhere at this price — except SuperAudio.</p>
+    <p class="subhead" data-animate="fade-up">Multi-protocol streaming is table stakes. Cross-protocol room tuning, Sonos-native grouping, device support that lives in the open, and onboarding a new speaker by talking to Claude? Not done anywhere at this price — except SuperAudio.</p>
 
     <div class="moat-callout" data-animate="fade-up">
       <div class="badge">SuperAudio Measurement-Assisted Sync · base app · on Mac</div>
@@ -173,7 +173,14 @@ import Base from '../layouts/Base.astro';
       <div class="badge">Open device profiles · the substrate</div>
       <div class="title">Your speaker's quirks belong in the open. <em>Not buried in our binary.</em></div>
       <p>Every speaker has a fingerprint — latency, codec, volume curve, firmware gotchas. SuperAudio keeps them in plain-JSON device profiles the app reads at runtime, instead of constants only we can change. It's live today: the volume curve for your B&amp;W speakers already comes from its profile, and more of each device's fingerprint moves into the open with every release.</p>
-      <p>The endgame: supporting a new speaker becomes <strong>data, not a software update</strong> — a profile anyone can read, audit, and contribute. Open substrate, paid app, no lock-in. The whole catalog of forgotten speakers, brought back one profile at a time.</p>
+      <p>And "open" isn't a promise — it's shipping. The profile catalog is a <a href="https://github.com/dapinitial/superaudio-device-profiles" target="_blank" rel="noopener">public, MIT-licensed repo on GitHub</a> today, with every contribution validated by CI against an open schema. Supporting a new speaker becomes <strong>data, not a software update</strong> — a profile anyone can read, audit, and contribute. Open substrate, paid app, no lock-in. The whole catalog of forgotten speakers, brought back one profile at a time.</p>
+    </div>
+
+    <div class="moat-callout" data-animate="fade-up">
+      <div class="badge">AI-assisted onboarding · in development</div>
+      <div class="title">A speaker we've never seen? <em>You onboard it by talking to Claude.</em></div>
+      <p>Those profiles aren't ours to write alone. SuperAudio includes a Claude Skill that walks an unrecognized speaker from "unknown" to "tuned": it probes the device on your LAN, identifies the make and model, drafts a profile, validates it against the open schema, and installs it — so the speaker plays on the very next press of Play. One conversation, no JSON by hand.</p>
+      <p>Then, if you choose, it opens a pull request to that public repo — and everyone else's copy of that speaker works too. Onboarding new hardware becomes a chat, and every chat makes the catalog bigger. <strong>In development, AirPlay 1 speakers first.</strong></p>
     </div>
   </div>
 </section>
