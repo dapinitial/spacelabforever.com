@@ -93,7 +93,7 @@
       <li>AirPlay 1 sender (RAOP) — drives every AirPort-Express-derived speaker built since 2008</li>
       <li>Sonos sender (UPnP) — drives every Sonos device ever made</li>
       <li>Multi-room sync within those two protocols, sample-accurate across AirPlay 1</li>
-      <li><strong>Cross-protocol Mac-mic calibration</strong> (shipped 2026-05-18) — built-in mic measures each speaker's arrival lag and gets AirPlay close to Sonos automatically; you finish with a quick by-ear nudge from the couch. No calibration mic, no extra hardware. Fully hands-free continuous sync arrives with AirPlay 2 (M12)</li>
+      <li><strong>Cross-protocol Mac-mic calibration</strong> (shipped 2026-05-18) — built-in mic measures each speaker's arrival lag and gets AirPlay close to Sonos automatically; you finish with a quick by-ear nudge from the couch. No calibration mic, no extra hardware. Fully hands-free continuous sync is in research (it depended on the AP2 path, now FairPlay-blocked) — not a shipping promise</li>
       <li>iOS companion app (free, App Store)</li>
       <li>All future updates to the base app, perpetual</li>
     </ul>
@@ -124,6 +124,10 @@
     <h2 data-animate="fade-up"><span class="num">3</span>Every addon is $5</h2>
     <p class="subhead">A flat price that does three jobs at once.</p>
 
+    <div style="border: 1px solid rgba(148,163,184,0.4); background: rgba(148,163,184,0.08); border-radius: 8px; padding: 16px 20px; margin: 8px 0 24px;">
+      <strong>⚠ SUPERSEDED (2026-07-09 pricing/GTM decision).</strong> The per-protocol <strong>$5 addon IAP model below is no longer the plan.</strong> V1 ships a <strong>single price — $19.99 (early-bird $12)</strong>, no à-la-carte unlocks; roadmap capabilities land in the app as it grows. The niche is volume-constrained (awareness + a free AirConnect substitute), not price-constrained, and per-sale support cost is fixed and high — a permanent low addon floor is a trap, a low <em>intro</em> price is not. This section is kept as the reasoning archive that led to the pivot. <strong>Separately (2026-07-14): the AirPlay 2 sender is BLOCKED on Apple FairPlay DRM</strong> — built and hardware-tested, but no audio renders — so it is parked, not a purchasable capability. See <a href="../docs/DECISIONS.md">DECISIONS.md</a> 2026-07-09 + 2026-07-14.
+    </div>
+
     <h3>Why flat</h3>
     <p>The pricing for individual addons (AirPlay 2, Chromecast, Bluetooth, Room Tuning, Multi-zone) is uniformly $5. Three reasons:</p>
     <ol>
@@ -137,7 +141,7 @@
       <table>
         <thead><tr><th>Addon</th><th>Buyer profile</th><th>Engineering complexity</th><th>Estimated take rate</th></tr></thead>
         <tbody>
-          <tr><td><strong>AirPlay 2 sender</strong> <span style="color: var(--text-dim); font-weight: 400;">(planned, M12)</span></td><td>Has a HomePod or newer Apple-TV-connected speaker</td><td>High — pairing + timing work, built on the MIT <code>pair_ap</code> library and standard protocols</td><td>40%</td></tr>
+          <tr><td><strong>AirPlay 2 sender</strong> <span style="color: var(--text-dim); font-weight: 400;">(PARKED — FairPlay-blocked)</span></td><td>Has a HomePod or newer Apple-TV-connected speaker</td><td>Control plane built + hardware-verified (fresh Swift/CryptoKit, no <code>pair_ap</code>); audio blocked on Apple's FairPlay <code>/fp-setup</code> DRM — not shippable</td><td>—</td></tr>
           <tr><td><strong>Chromecast sender</strong></td><td>Has a Chromecast Audio, Nest Hub, or Cast-compatible TV</td><td>Medium</td><td>15%</td></tr>
           <tr><td><strong>Bluetooth fan-out</strong></td><td>Wants to also hit a Bluetooth speaker simultaneously</td><td>Medium — OS limits A2DP devices</td><td>10%</td></tr>
           <tr><td><strong>Room Tuning (iPhone-mic walk-around)</strong> <span style="color: var(--text-dim); font-weight: 400;">(planned, M11 — iPhone-mic)</span></td><td>Acoustically-aware; cares about sound quality; wants frequency correction in multiple listening positions</td><td>Medium — base-app Mac-mic auto-calibrate shipped 2026-05-18 (delay measurement); addon delivers iPhone-mic walk-around + EQ correction on top</td><td>30%</td></tr>

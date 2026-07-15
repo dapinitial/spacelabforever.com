@@ -28,14 +28,14 @@ import Base from '../layouts/Base.astro';
     <div class="eyebrow">Coming soon · macOS</div>
     <h1 data-animate="reveal">Every speaker in your house. <em>Playing the same song.</em><br>Including the old ones.</h1>
     <p class="lede" data-animate="fade-up">
-      <strong>Multi-room audio</strong> for households with mixed AirPlay 1, Sonos, and other speakers the modern Apple/Sonos/Google ecosystems forgot. <strong>One Mac app. Roughly half the price of the closest alternative.</strong> Plays to your AirPlay 1 and Sonos speakers on day one — more protocols via $5 addons — measurement-assisted sync you fine-tune to your room by ear, without lock-in, without subscriptions.
+      <strong>Multi-room audio</strong> for households with mixed AirPlay 1, Sonos, and other speakers the modern Apple/Sonos/Google ecosystems forgot. <strong>One Mac app. Roughly half the price of the closest alternative.</strong> Plays to your AirPlay 1 and Sonos speakers — measurement-assisted sync you fine-tune to your room by ear, without lock-in, without subscriptions.
     </p>
     <div class="cta-row" data-animate="fade-up">
       <a href="#waitlist" class="btn-primary" data-cta="hero-get-notified">Get notified at launch</a>
       <a href="#how" class="btn-secondary" data-cta="hero-see-how">See how it works</a>
     </div>
     <div class="price-tease">
-      Mac app from <strong>$19</strong> · Hub Stick hardware <strong>$59</strong> · TV → every speaker via the <strong>Hub Pro</strong> (in development)
+      Mac app <strong>$19.99</strong> (early-bird <strong>$12</strong> for the waitlist) · Hub Stick hardware <strong>$59</strong> · TV → every speaker via the <strong>Hub Pro</strong> (in development)
     </div>
   </div>
 </header>
@@ -79,7 +79,7 @@ import Base from '../layouts/Base.astro';
       <div class="how-step" data-animate="fade-up">
         <div class="num">2</div>
         <h4>It finds your speakers</h4>
-        <p>AirPlay 1, Sonos, and (with addons) AirPlay 2, Chromecast, Bluetooth. Live — no manual setup.</p>
+        <p>AirPlay 1 and Sonos, live — no manual setup. (More protocols are on the roadmap.)</p>
       </div>
       <div class="how-step" data-animate="fade-up">
         <div class="num">3</div>
@@ -116,9 +116,9 @@ import Base from '../layouts/Base.astro';
         <div class="icon">📻</div>
         <div>
           <div class="name">AirPlay 2 speakers</div>
-          <div class="desc">HomePod, post-2018 receivers, AP2-licensed brands</div>
+          <div class="desc">Sender is built &amp; hardware-tested, but the audio path is gated by Apple's FairPlay DRM — not shippable today. We'll add it if that unlocks.</div>
         </div>
-        <span class="status addon">planned · $5 addon</span>
+        <span class="status research">exploring · Apple DRM</span>
       </div>
       <div class="device" data-animate="fade-up">
         <div class="icon">📡</div>
@@ -126,7 +126,7 @@ import Base from '../layouts/Base.astro';
           <div class="name">Chromecast Audio &amp; Cast speakers</div>
           <div class="desc">Including older Chromecast Audio devices</div>
         </div>
-        <span class="status addon">+$5 addon</span>
+        <span class="status research">roadmap</span>
       </div>
       <div class="device" data-animate="fade-up">
         <div class="icon">📶</div>
@@ -134,7 +134,7 @@ import Base from '../layouts/Base.astro';
           <div class="name">Bluetooth speakers</div>
           <div class="desc">A2DP fan-out to BT speakers and headphones</div>
         </div>
-        <span class="status addon">+$5 addon</span>
+        <span class="status research">roadmap</span>
       </div>
       <div class="device" data-animate="fade-up">
         <div class="icon">🖥️</div>
@@ -158,8 +158,8 @@ import Base from '../layouts/Base.astro';
       <div class="title">Click Play All. <em>SuperAudio measures every speaker, then you fine-tune to where you're sitting.</em></div>
       <p>Sonos Trueplay does this — for Sonos hardware only. Dirac Live does it — for $499 and a pro AVR. Roon does it — for $700 and Roon-ready endpoints.</p>
       <p><strong>SuperAudio's cross-protocol sync is real and audible across every speaker we support, on Mac today.</strong> Your Mac's built-in microphone hears a 1-second chirp from each speaker and measures the actual arrival lag, getting AirPlay 1 close to Sonos automatically. From there you set a static offset and nudge it by ear — usually a one-time per-session tweak — because your ears at the couch are the final judge, not the mic's position. Verified against B&amp;W A5 + B&amp;W A7 (side room) + Sonos Playbar gen 1. Works with the AirPlay 1 speakers you've owned since 2014.</p>
-      <p>The $5 <strong>Room Tuning addon</strong> (M11) extends this to an iPhone-mic walk-around — measure multiple listening positions, generate per-zone EQ correction. Same algorithm, more positions, frequency-domain correction on top.</p>
-      <p>This is the moat. Everyone else's room tuning is locked to their ecosystem. Ours is locked to your living room. Fully hands-free continuous sync is in development — it arrives with our AirPlay 2 path (M12).</p>
+      <p>Planned <strong>Room Tuning</strong> (M11) extends this to an iPhone-mic walk-around — measure multiple listening positions, generate per-zone EQ correction. Same algorithm, more positions, frequency-domain correction on top.</p>
+      <p>This is the moat. Everyone else's room tuning is locked to their ecosystem. Ours is locked to your living room. Fully hands-free continuous correction is in research — today's sync is measurement-assisted with a one-time by-ear nudge.</p>
     </div>
 
     <div class="moat-callout" data-animate="fade-up">
@@ -234,14 +234,8 @@ import Base from '../layouts/Base.astro';
       </div>
     </div>
 
-    <h3 style="margin-top: 56px; text-align: center;">Optional add-ons, $5 each</h3>
-    <div class="addons-grid">
-      <div class="addon" data-animate="fade-up"><div class="price">$5</div><div class="name">Room Tuning</div></div>
-      <div class="addon" data-animate="fade-up"><div class="price">$5</div><div class="name">AirPlay 2 (planned · M12)</div></div>
-      <div class="addon" data-animate="fade-up"><div class="price">$5</div><div class="name">Chromecast</div></div>
-      <div class="addon" data-animate="fade-up"><div class="price">$5</div><div class="name">Bluetooth</div></div>
-      <div class="addon" data-animate="fade-up"><div class="price">$5</div><div class="name">Multi-zone presets</div></div>
-    </div>
+    <h3 style="margin-top: 56px; text-align: center;">One price. Everything the app does.</h3>
+    <p class="subhead" style="text-align: center;" data-animate="fade-up">No à-la-carte unlocks, no protocol paywalls, no subscription. The Mac app is <strong>$19.99</strong> — <strong>$12 early-bird for the waitlist</strong> — and includes AirPlay 1 + Sonos and the measurement-assisted room sync. New capabilities on the roadmap (Room Tuning, more protocols) ship into the app as it grows.</p>
   </div>
 </section>
 
@@ -252,12 +246,12 @@ import Base from '../layouts/Base.astro';
 
     <details class="faq" data-animate="fade-up">
       <summary>How is this different from Airfoil?</summary>
-      <p>Airfoil ($35) is a 20-year-old Mac app from Rogue Amoeba. It does multi-protocol Mac→speakers streaming, and it's good at what it does. SuperAudio costs $19 — well under Airfoil's price — includes optional cross-protocol Room Tuning ($5) that doesn't exist in any consumer product, and explicitly supports your stranded old hardware (gen-1 Sonos, B&amp;W A5/A7, AirPort Express, old Apple TVs). For the living room, our forthcoming Hub Pro plugs into your TV's HDMI ARC and fans <em>all</em> TV audio out to every speaker in sync — something no Mac app (or Apple TV app) can do, because TV apps can't capture protected streaming audio.</p>
+      <p>Airfoil ($35) is a 20-year-old Mac app from Rogue Amoeba. It does multi-protocol Mac→speakers streaming, and it's good at what it does. SuperAudio costs $19.99 (early-bird $12) — well under Airfoil's price — includes measurement-assisted cross-protocol sync that doesn't exist in any consumer product, and explicitly supports your stranded old hardware (gen-1 Sonos, B&amp;W A5/A7, AirPort Express, old Apple TVs). For the living room, our forthcoming Hub Pro plugs into your TV's HDMI ARC and fans <em>all</em> TV audio out to every speaker in sync — something no Mac app (or Apple TV app) can do, because TV apps can't capture protected streaming audio.</p>
     </details>
 
     <details class="faq" data-animate="fade-up">
       <summary>Does my music actually stay in sync between rooms?</summary>
-      <p>Yes — with a one-time tune. AirPlay 1 receivers sync sample-accurately via our shared timing anchor; Sonos has a hidden internal buffer that we measure with your Mac's microphone. Your Mac plays a brief chirp from each speaker, measures how long the sound takes to reach where you're sitting, and gets the speakers close. You then set a static offset and nudge it by ear to lock it in at your seat — typically a single per-session adjustment, since the mic's spot isn't your spot. Sonos's buffer can drift between sessions, so you may re-tune occasionally. Fully hands-free continuous correction is the goal, coming with our AirPlay 2 path (M12). The M11 iPhone-mic Room Tuning addon extends measurement with a walk-around for whole-room frequency correction.</p>
+      <p>Yes — with a one-time tune. AirPlay 1 receivers sync sample-accurately via our shared timing anchor; Sonos has a hidden internal buffer that we measure with your Mac's microphone. Your Mac plays a brief chirp from each speaker, measures how long the sound takes to reach where you're sitting, and gets the speakers close. You then set a static offset and nudge it by ear to lock it in at your seat — typically a single per-session adjustment, since the mic's spot isn't your spot. Sonos's buffer can drift between sessions, so you may re-tune occasionally. Fully hands-free continuous correction is in research — not a shipping promise. Planned iPhone-mic Room Tuning (M11) extends measurement with a walk-around for whole-room frequency correction.</p>
     </details>
 
     <details class="faq" data-animate="fade-up">
