@@ -1,12 +1,10 @@
 ---
-import Base from '../layouts/Base.astro';
-import '../styles/shared.css';
-import '../styles/pricing.css';
+import Console from '../layouts/Console.astro';
 import content from '../content/pricing.html?raw';
-const title = "SuperAudio — Pricing Derivation";
-const description = "SuperAudio — how every price point ($19 / $5 / $59 / $79 / $249) was derived. Sensitivity, bundling, international, and what we will never sell.";
 ---
 
-<Base title={title} description={description}>
+<Console
+  title="SuperAudio — Pricing"
+  description="One price: $19.99 (early-bird $12 for the waitlist). AirPlay 1 + Sonos, cross-protocol room sync. No subscription, no addons.">
   <Fragment set:html={content} />
-</Base>
+</Console>

@@ -1,392 +1,258 @@
-<header class="hero">
+<style>
+  :root{
+    --ground:#0a0f13; --ground2:#0c1319; --surface:#111a20; --surface2:#16212a; --raise:#1b2831;
+    --line:#22303a; --line-bright:#2f424e; --ink:#e9eff3; --ink-dim:#94a4ae; --ink-faint:#5f6c75;
+    --accent:#46d4e6; --accent-deep:#20b6cb; --accent-soft:rgba(70,212,230,.13);
+    --signal:#f2b046; --signal-soft:rgba(242,176,70,.14);
+    --good:#5bd98a; --warn:#f2b13d; --crit:#f2685f; --good-soft:rgba(91,217,138,.15);
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+    --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+    --maxw:1120px; --pad:26px;
+    --glow:0 0 0 1px rgba(70,212,230,.16), 0 0 30px rgba(70,212,230,.12);
+    --card:0 1px 0 rgba(255,255,255,.03) inset, 0 12px 34px rgba(0,0,0,.4);
+  }
+  @media (prefers-color-scheme: light){
+    :root{
+      --ground:#e9eef1; --ground2:#eef3f5; --surface:#ffffff; --surface2:#f2f7f9; --raise:#e8eff2;
+      --line:#d7e1e6; --line-bright:#c3d1d8; --ink:#0e1a20; --ink-dim:#51606a; --ink-faint:#8595a0;
+      --accent:#0a91a4; --accent-deep:#0a91a4; --accent-soft:rgba(10,145,164,.10);
+      --signal:#a86f13; --signal-soft:rgba(168,111,19,.10);
+      --good:#178a4c; --warn:#a9711a; --crit:#c53c33; --good-soft:rgba(23,138,76,.10);
+      --glow:0 0 0 1px rgba(10,145,164,.15), 0 0 24px rgba(10,145,164,.10);
+      --card:0 1px 2px rgba(16,26,31,.05), 0 12px 30px rgba(16,26,31,.08);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0a0f13; --ground2:#0c1319; --surface:#111a20; --surface2:#16212a; --raise:#1b2831;
+    --line:#22303a; --line-bright:#2f424e; --ink:#e9eff3; --ink-dim:#94a4ae; --ink-faint:#5f6c75;
+    --accent:#46d4e6; --accent-deep:#20b6cb; --accent-soft:rgba(70,212,230,.13);
+    --signal:#f2b046; --good:#5bd98a; --warn:#f2b13d; --crit:#f2685f; --good-soft:rgba(91,217,138,.15);
+    --glow:0 0 0 1px rgba(70,212,230,.16), 0 0 30px rgba(70,212,230,.12);
+    --card:0 1px 0 rgba(255,255,255,.03) inset, 0 12px 34px rgba(0,0,0,.4);
+  }
+  :root[data-theme="light"]{
+    --ground:#e9eef1; --ground2:#eef3f5; --surface:#ffffff; --surface2:#f2f7f9; --raise:#e8eff2;
+    --line:#d7e1e6; --line-bright:#c3d1d8; --ink:#0e1a20; --ink-dim:#51606a; --ink-faint:#8595a0;
+    --accent:#0a91a4; --accent-deep:#0a91a4; --accent-soft:rgba(10,145,164,.10);
+    --signal:#a86f13; --good:#178a4c; --warn:#a9711a; --crit:#c53c33; --good-soft:rgba(23,138,76,.10);
+    --glow:0 0 0 1px rgba(10,145,164,.15), 0 0 24px rgba(10,145,164,.10);
+    --card:0 1px 2px rgba(16,26,31,.05), 0 12px 30px rgba(16,26,31,.08);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+  body{margin:0; background:var(--ground); color:var(--ink); font-family:var(--sans); font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 var(--pad)}
+  a{color:inherit; text-decoration:none}
+  h1,h2,h3,h4{margin:0; letter-spacing:-.02em; line-height:1.05; text-wrap:balance}
+  p{margin:0}
+  ::selection{background:var(--accent-soft)}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:3px}
+  .mono{font-family:var(--mono)}
+  .eyebrow{font-family:var(--mono); font-size:11.5px; letter-spacing:.24em; text-transform:uppercase; color:var(--accent); font-weight:600}
+  .led{width:8px; height:8px; border-radius:50%; background:var(--good); box-shadow:0 0 8px var(--good); flex:none}
+
+  nav{position:sticky; top:0; z-index:50; backdrop-filter:blur(12px); background:color-mix(in srgb,var(--ground) 82%, transparent); border-bottom:1px solid var(--line)}
+  nav .bar{display:flex; align-items:center; justify-content:space-between; height:60px}
+  .brand{display:flex; align-items:center; gap:11px; font-weight:700; font-size:16px}
+  .brand .mk{width:26px; height:26px; border:1px solid var(--line-bright); border-radius:7px; background:var(--surface); position:relative; overflow:hidden}
+  .brand .mk canvas{position:absolute; inset:0; width:100%; height:100%}
+  .nav-links{display:flex; align-items:center; gap:26px; font-family:var(--mono); font-size:12.5px; color:var(--ink-dim)}
+  .nav-links a:hover{color:var(--ink)} .nav-links a.cur{color:var(--accent)}
+  .btn{font-family:var(--mono); font-weight:700; font-size:13px; letter-spacing:.02em; padding:10px 18px; border-radius:9px; border:1px solid transparent; cursor:pointer; transition:transform .15s ease, box-shadow .2s ease}
+  .btn-primary{background:var(--accent); color:#04191d; box-shadow:var(--glow)}
+  .btn-primary:hover{transform:translateY(-1px); box-shadow:0 0 0 1px var(--accent), 0 0 34px rgba(70,212,230,.35)}
+  @media (max-width:640px){ .nav-links{display:none} }
+
+  .hero{position:relative; overflow:hidden; border-bottom:1px solid var(--line); background:radial-gradient(120% 90% at 50% -10%, var(--surface2), var(--ground) 62%)}
+  #heroScope{position:absolute; inset:0; width:100%; height:100%; opacity:.6; pointer-events:none; mask-image:linear-gradient(180deg,transparent, #000 20%, #000 82%, transparent)}
+  @media (prefers-color-scheme: light){ #heroScope{opacity:.92} }
+  :root[data-theme="dark"] #heroScope{opacity:.6} :root[data-theme="light"] #heroScope{opacity:.92}
+  .hero .wrap{position:relative; padding:78px 26px 64px; text-align:center}
+  .eyebrow.blk{display:block; margin-bottom:20px}
+  h1.hh{font-size:clamp(32px,5.6vw,58px); font-weight:800; letter-spacing:-.03em; max-width:17ch; margin:0 auto}
+  h1.hh .cy{color:var(--accent)}
+  .hsub{margin:22px auto 0; color:var(--ink-dim); font-size:clamp(16px,2.2vw,19px); max-width:54ch; line-height:1.5}
+
+  section.band{padding:76px 0; border-bottom:1px solid var(--line)}
+  .sec-head{max-width:62ch; margin-bottom:40px}
+  .sec-head .eyebrow{display:block; margin-bottom:15px}
+  .sec-head h2{font-size:clamp(23px,3.4vw,34px); font-weight:800}
+  .sec-head p{margin-top:14px; color:var(--ink-dim); font-size:16px; line-height:1.55}
+
+  /* positioning map */
+  .mapwrap{display:grid; grid-template-columns:1.1fr .9fr; gap:28px; align-items:center}
+  .map{position:relative; aspect-ratio:1/1; background:var(--surface); border:1px solid var(--line); border-radius:16px; box-shadow:var(--card); overflow:hidden}
+  .map .grid-line{position:absolute; background:var(--line)}
+  .map .axis{position:absolute; background:var(--line-bright)}
+  .map .axis.x{left:0; right:0; top:50%; height:1px} .map .axis.y{top:0; bottom:0; left:50%; width:1px}
+  .map .quad-hi{position:absolute; top:6px; right:6px; width:calc(50% - 12px); height:calc(50% - 12px); border-radius:10px; background:radial-gradient(120% 120% at 100% 0%, var(--accent-soft), transparent 70%); border:1px dashed color-mix(in srgb,var(--accent) 32%,transparent)}
+  .map .axlabel{position:absolute; font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint)}
+  .map .axlabel.top{top:10px; left:50%; transform:translateX(-50%)}
+  .map .axlabel.bot{bottom:10px; left:50%; transform:translateX(-50%)}
+  .map .axlabel.left{left:12px; top:50%; transform:translateY(-50%) rotate(-90deg); transform-origin:left center}
+  .map .axlabel.right{right:12px; top:50%; transform:translateY(-50%) rotate(90deg); transform-origin:right center}
+  .dot{position:absolute; transform:translate(-50%,-50%); display:flex; align-items:center; gap:8px; transition:opacity .5s ease}
+  .dot .pt{width:11px; height:11px; border-radius:50%; background:var(--ink-faint); flex:none}
+  .dot .lbl{font-family:var(--mono); font-size:11px; color:var(--ink-dim); white-space:nowrap}
+  .dot .lbl b{color:var(--ink)}
+  .dot.us{z-index:3}
+  .dot.us .pt{width:16px; height:16px; background:var(--accent); box-shadow:0 0 0 4px var(--accent-soft), 0 0 18px var(--accent)}
+  .dot.us .lbl{color:var(--accent); font-weight:700; font-size:12.5px}
+  .map-legend{display:flex; flex-direction:column; gap:16px}
+  .map-legend h3{font-size:21px; font-weight:800; letter-spacing:-.02em; margin-bottom:4px}
+  .map-legend p{color:var(--ink-dim); font-size:15px; line-height:1.55}
+  .map-legend .pins{display:flex; flex-direction:column; gap:0; margin-top:6px; font-family:var(--mono); font-size:12.5px}
+  .map-legend .pins .r{display:flex; gap:11px; align-items:baseline; padding:9px 0; border-top:1px solid var(--line); color:var(--ink-faint)}
+  .map-legend .pins .r b{color:var(--ink-dim); min-width:92px; display:inline-block}
+  .map-legend .pins .r.us b{color:var(--accent)}
+  @media (max-width:860px){ .mapwrap{grid-template-columns:1fr} .map{max-width:480px; margin:0 auto; width:100%} }
+
+  /* who it's for */
+  .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+  .pcard{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:26px; box-shadow:var(--card); position:relative; overflow:hidden}
+  .pcard::before{content:""; position:absolute; left:0; top:0; bottom:0; width:2px; background:linear-gradient(180deg,var(--accent),transparent)}
+  .pcard .tag{font-family:var(--mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); font-weight:600}
+  .pcard h4{margin:12px 0 10px; font-size:18px; font-weight:700}
+  .pcard p{color:var(--ink-dim); font-size:14px; line-height:1.55}
+  @media (max-width:760px){ .grid3{grid-template-columns:1fr} }
+
+  /* the combination nobody sells */
+  .combo{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:12px 30px 26px; box-shadow:var(--card)}
+  .combo .ih{font-family:var(--mono); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-dim); padding:20px 0 6px}
+  .combo ul{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:0 34px}
+  .combo li{display:flex; gap:12px; align-items:flex-start; padding:14px 0; border-top:1px solid var(--line); font-size:14.5px; line-height:1.5}
+  .combo li .ck{color:var(--accent); font-family:var(--mono); flex:none; margin-top:1px}
+  .combo li b{font-weight:600} .combo li .m{color:var(--ink-dim)}
+  .combo .foot{margin-top:18px; padding-top:16px; border-top:1px solid var(--line); font-family:var(--mono); font-size:12.5px; color:var(--accent); line-height:1.6}
+  @media (max-width:640px){ .combo ul{grid-template-columns:1fr} }
+
+  .waitlist{text-align:center; background:radial-gradient(90% 120% at 50% 0%, var(--surface2), var(--ground) 70%)}
+  .waitlist h2{font-size:clamp(24px,3.6vw,38px); font-weight:800; max-width:20ch; margin:0 auto}
+  .waitlist p{margin:16px auto 0; color:var(--ink-dim); max-width:48ch; font-size:16px}
+  form.wl{margin:30px auto 0; display:flex; gap:10px; max-width:470px}
+  form.wl input{flex:1; background:var(--surface); border:1px solid var(--line-bright); color:var(--ink); font-family:var(--mono); font-size:14px; padding:14px 16px; border-radius:10px; outline:none}
+  form.wl input:focus{border-color:var(--accent); box-shadow:var(--glow)}
+  .wl-note{margin-top:15px; font-family:var(--mono); font-size:11.5px; color:var(--ink-faint)}
+  .wl-done{display:none; margin:26px auto 0; max-width:470px; padding:16px 20px; border:1px solid color-mix(in srgb,var(--good) 40%,transparent); background:var(--good-soft); border-radius:12px; font-family:var(--mono); font-size:13.5px; color:var(--good); align-items:center; gap:12px; justify-content:center}
+  .wl-done.on{display:flex}
+  @media (max-width:520px){ form.wl{flex-direction:column} }
+
+  footer{padding:38px 0 56px; color:var(--ink-faint); font-family:var(--mono); font-size:11.5px}
+  footer .frow{display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; border-top:1px solid var(--line); padding-top:22px}
+  footer a{color:var(--ink-dim)} footer a:hover{color:var(--accent)}
+  .rv{opacity:0; transform:translateY(14px); transition:opacity .7s ease, transform .7s ease}
+  .rv.in{opacity:1; transform:none}
+  @media (prefers-reduced-motion:reduce){ .rv{opacity:1; transform:none; transition:none} }
+</style>
+
+<nav>
+  <div class="wrap bar">
+    <a class="brand" href="/"><span class="mk"><canvas id="markScope" width="52" height="52" aria-hidden="true"></canvas></span> SuperAudio</a>
+    <div class="nav-links"><a href="/#devices">Speakers</a><a href="/positioning" class="cur">Positioning</a><a href="/competitive-landscape">Compare</a><a href="/pricing">Price</a></div>
+    <a href="#waitlist" class="btn btn-primary">Get notified</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <canvas id="heroScope" aria-hidden="true"></canvas>
   <div class="wrap">
-    <div class="eyebrow">Brand &amp; Positioning · Voice, pillars, tests</div>
-    <h1 data-animate="reveal">How we sound, what we say, <em>and what we don't.</em></h1>
-    <p class="lede">
-      Positioning is what differentiates us in one sentence; brand voice is the tone that keeps every marketing surface (landing page, App Store description, press copy, support replies) coherent. This document captures both — the five message pillars that should appear everywhere, the antithesis test that prevents drift, and the visual identity. <strong>If a piece of copy fails the tests on this page, rewrite it.</strong>
-    </p>
-    <div class="meta">
-      <span><strong>Date:</strong> 2026-05-13 · revised 2026-05-16 (Technical framing section added) · same-night sharpening: "software adapts to your gear, not hardware-per-vendor" pullquote captures the planned (M6.5) device-onboarding Skill's universal-adapter role across heterogeneous households</span>
-      <span><strong>Author:</strong> David Puerto</span>
-      <span><strong>Status:</strong> Pre-launch · binding for all marketing surfaces</span>
-    </div>
+    <span class="eyebrow blk">Positioning · the wedge</span>
+    <h1 class="hh">Everyone else picks one ecosystem and defends it. <span class="cy">We're the door between them.</span></h1>
+    <p class="hsub">Apple won't drive your Sonos. Sonos won't drive your B&amp;W. The whole industry is built on walled gardens. SuperAudio is the one product that just routes between them — at a price that isn't a statement piece.</p>
   </div>
 </header>
 
-<!-- 1. The pitch in three lengths -->
-<section>
+<section class="band">
   <div class="wrap">
-    <h2 data-animate="fade-up"><span class="num">1</span>The pitch, in three lengths</h2>
-    <p class="subhead">Use the length that fits the channel. Don't paraphrase — these are battle-tested.</p>
-
-    <div class="pitch-stack">
-      <div class="pitch short">
-        <div class="len">7 words</div>
-        <p>Multi-room audio without the walled garden.</p>
-      </div>
-      <div class="pitch medium">
-        <div class="len">28 words</div>
-        <p>SuperAudio captures any Mac audio and streams it in sync to every wireless speaker in your house — AirPlay 1, Sonos, AirPlay 2, Chromecast, Bluetooth — regardless of brand.</p>
-      </div>
-      <div class="pitch long">
-        <div class="len">~80 words · App Store / press</div>
-        <p>Every multi-room audio product locks you into one ecosystem: Sonos with Sonos, Apple with Apple, Bluesound with Bluesound. SuperAudio is the one that doesn't. It captures audio from any Mac app and streams it in sync to every wireless speaker on your network — your old Bowers &amp; Wilkins, your gen-1 Sonos Playbar, your HomePod, your kitchen Chromecast — at the same time. One-time purchase, no subscription, no cloud, LAN-only.</p>
-      </div>
+    <div class="sec-head rv">
+      <span class="eyebrow">The map · where everyone sits</span>
+      <h2>The affordable, cross-ecosystem, consumer-ready corner is empty. That's the whole thesis.</h2>
+      <p>Plot every option on two axes that actually matter to a normal household — does it play all your speakers, and is it something a normal person can buy and use — and a gap opens up.</p>
     </div>
-  </div>
-</section>
-
-<!-- 2. Voice -->
-<section>
-  <div class="wrap">
-    <h2 data-animate="fade-up"><span class="num">2</span>Voice</h2>
-    <p class="subhead">How we sound. Confident, plain-spoken, specific. The opposite of marketing jargon.</p>
-
-    <div class="voice-grid">
-      <div class="voice do">
-        <h4>What we sound like</h4>
-        <ul>
-          <li><strong>Direct.</strong> "Your B&amp;W A7 plays alongside your Sonos. Same song, same time."</li>
-          <li><strong>Specific.</strong> Name the actual hardware. Mention real protocols. Cite real prices.</li>
-          <li><strong>Honest about limits.</strong> "Sonos has ~200ms of internal buffering you can't bypass. We expose it as an offset slider."</li>
-          <li><strong>Calm.</strong> No urgency manufactured by us. The product is for people who already know what they want.</li>
-          <li><strong>Technical when asked.</strong> AVS Forum / r/audiophile audiences can see right through fluff; we use the actual terms.</li>
-        </ul>
+    <div class="mapwrap">
+      <div class="map rv" id="map">
+        <div class="quad-hi"></div>
+        <div class="axis x"></div><div class="axis y"></div>
+        <span class="axlabel top">Consumer-ready</span>
+        <span class="axlabel bot">DIY · pro-only</span>
+        <span class="axlabel left">One ecosystem</span>
+        <span class="axlabel right">Plays everything</span>
+        <!-- positions in % from top-left; x:0 single→100 cross, y:0 top(consumer)→100 bottom(diy) -->
+        <div class="dot us" style="left:80%; top:20%"><span class="pt"></span><span class="lbl"><b>SuperAudio</b> · $20</span></div>
+        <div class="dot" style="left:60%; top:30%"><span class="pt"></span><span class="lbl">Airfoil · $35</span></div>
+        <div class="dot" style="left:88%; top:74%"><span class="pt"></span><span class="lbl">AirConnect · free</span></div>
+        <div class="dot" style="left:22%; top:26%"><span class="pt"></span><span class="lbl">Sonos app</span></div>
+        <div class="dot" style="left:74%; top:80%"><span class="pt"></span><span class="lbl">Roon · $700</span></div>
+        <div class="dot" style="left:30%; top:72%"><span class="pt"></span><span class="lbl">Bluesound / BluOS</span></div>
       </div>
-      <div class="voice dont">
-        <h4>What we never sound like</h4>
-        <ul>
-          <li><strong>Hype words.</strong> Never "revolutionary," "game-changer," "the future of audio," "next-generation."</li>
-          <li><strong>"AI."</strong> We don't use AI in the product. Don't put it in the marketing.</li>
-          <li><strong>Subscription cliché.</strong> "Cancel anytime" — not relevant; we don't take subscriptions.</li>
-          <li><strong>FOMO / urgency.</strong> No "limited time," "act now," "while supplies last." The product will be available.</li>
-          <li><strong>Apologetic.</strong> Don't downplay limits in fine print. Lead with them honestly.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 3. The five message pillars -->
-<section>
-  <div class="wrap">
-    <h2 data-animate="fade-up"><span class="num">3</span>The five pillars</h2>
-    <p class="subhead">Every marketing surface should make at least one of these explicit. If it doesn't, it's vague.</p>
-
-    <div class="pillar-grid">
-      <div class="pillar" style="border-color: var(--accent); background: linear-gradient(180deg, rgba(255,106,61,0.06) 0%, var(--bg-card) 100%);">
-        <div class="num">1</div>
-        <div class="headline">Cross-ecosystem multi-room, in sync</div>
-        <div class="body">Your AirPlay 1 and your Sonos — playing the same song at the same time, measurement-assisted and tuned to your room (a quick per-session ear-tune is typical today; hands-free continuous sync is in research). <strong>Nobody else does this.</strong> Sonos won't drive your B&amp;W. Apple won't drive your Sonos. We do both. (AirPlay 2 speakers like HomePod are built and hardware-tested but parked — Apple's FairPlay DRM blocks the audio path.)</div>
-      </div>
-
-      <div class="pillar">
-        <div class="num">2</div>
-        <div class="headline">Sends the original stream to AirPlay 1</div>
-        <div class="body">AirPlay 1 carries lossless ALAC at 44.1/16. AirPlay 2 transcodes to AAC ~256 kbps. Your old AirPort-Express-era speakers are the only wireless path Apple ever shipped that's actually lossless — and we send the original ALAC stream from Apple Music Lossless, Spotify, or any audio source to them. <strong>Your 2014 B&amp;W A5 plays Apple Music Lossless. Your $300 HomePod doesn't.</strong></div>
-      </div>
-
-      <div class="pillar">
-        <div class="num">3</div>
-        <div class="headline">No walled garden</div>
-        <div class="body">SuperAudio doesn't care which brand made your speaker. The Mac app, the iOS companion, the Hub Stick, the Hub Pro — all treat every speaker equally. The opposite of how Sonos, Bluesound, and Apple sell their hardware.</div>
-      </div>
-
-      <div class="pillar">
-        <div class="num">4</div>
-        <div class="headline">One-time purchase, never subscription</div>
-        <div class="body">$19 for the Mac app. $5 for any addon. Pay once, own forever. We don't charge for cloud features because <strong>we don't have any</strong>. Roon's $150/yr is the alternative. So is Sonos asking you to buy new speakers when they obsolete the app.</div>
-      </div>
-
-      <div class="pillar">
-        <div class="num">5</div>
-        <div class="headline">LAN-only, no cloud, no telemetry</div>
-        <div class="body">Discovery, audio routing, control — all on your local network. We don't collect usage data. We don't have a server. We don't have an account system. The product runs entirely between your devices, the way it should.</div>
-      </div>
-
-      <div class="pillar">
-        <div class="num">6</div>
-        <div class="headline">Works with what you already own</div>
-        <div class="body">Your 2012 B&amp;W A5 still works. Your gen-1 Sonos Playbar still works. Your $30 Chromecast Audio still works. Buying SuperAudio doesn't ask you to replace anything — it asks your existing speakers to finally play together.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 3.5 — Technical framing, for non-consumer surfaces -->
-<section style="background: linear-gradient(180deg, rgba(103,232,249,0.04) 0%, transparent 100%);">
-  <div class="wrap">
-    <h2 data-animate="fade-up" style="display: flex; align-items: baseline; gap: 12px;">
-      Technical framing
-      <span style="font-size: 14px; font-weight: 400; color: var(--text-muted); letter-spacing: 0;">for investors, partners, DevRel — not consumer surfaces</span>
-    </h2>
-    <p class="subhead">The five pillars above are <em>consumer</em> framing — concrete, brand-named, user-centric. When talking to people who understand technical layers (investors, B&amp;W/Naim/KEF partnership conversations, Anthropic DevRel for Skills marketplace, technical press), use this sharper framing instead. It describes what SuperAudio <strong>is technically</strong>, not just what it does for users.</p>
-
-    <div class="pullquote" style="border-left-color: var(--cyan); margin: 24px 0 32px;">
-      SuperAudio is a heterogeneous real-time audio synchronization and orchestration platform — <strong>compositional stacks, not single systems</strong>.
-    </div>
-
-    <h3>Three-line elaboration</h3>
-    <ul style="font-size: 16px; line-height: 1.7; color: var(--text-muted); max-width: 820px;">
-      <li><strong>The market has fragments.</strong> Snapcast does multi-room sync but in its own ecosystem (Snapclient on every endpoint). Shairport-sync is an AirPlay receiver. AirConnect is a one-direction protocol bridge. OwnTone is a Linux media server. Each handles one slice — none combine. (See <a href="COMPETITIVE_LANDSCAPE.html#open-source" style="color: var(--cyan);">COMPETITIVE_LANDSCAPE.html § 3 open-source matrix</a> for the full landscape.)</li>
-      <li><strong>SuperAudio is the layer above.</strong> Composes those fragments into a unified product, then adds the pieces that don't exist anywhere yet: cross-protocol sample-accurate sync via per-chunk wall-time NTP anchor, per-sink mid-stream controls, <strong>cross-protocol Mac-mic auto-calibration (shipped 2026-05-18)</strong> + iPhone-mic Room Tuning (M11 extension), and — planned (M6.5) — a <strong>guided device-onboarding Claude Skill</strong> that walks a user through onboarding any audio device (speaker, soundbar, AVR, smart-TV-as-source) in about 10 minutes, contributing the profile back to the public MIT <code>superaudio-device-profiles</code> repo for every other user.</li>
-      <li><strong>The technical value is not the user-facing app</strong> — that's the consumer surface. The technical value is the synchronization model + device abstraction layer + latency correction system + interoperability framework underneath. Those are the parts that could one day license to OEMs, integrate into Home Assistant, ship as an SDK, or anchor a platform business if M8 launch validates the core hypothesis. (Deferred decision; see <code>docs/DECISIONS.md</code> 2026-05-16 "Platform boundary" entry.)</li>
-    </ul>
-
-    <div class="pullquote" style="border-left-color: var(--cyan); margin: 28px 0;">
-      <strong>Software adapts to your gear, not hardware-per-vendor.</strong> Every walled-garden incumbent (Sonos, Apple, Google) solves heterogeneity by trying to <em>be</em> the whole household — buy our hardware end-to-end and we'll make it work together. SuperAudio inverts that: the software <em>adapts to whatever audio gear you already own</em> — Sony soundbar with B&amp;W AP1 speakers and a Bluetooth Bose in the guest room — by onboarding each device's specific quirks and writing a per-device profile. The planned (M6.5) guided device-onboarding Skill is the universal adapter; the hardware SKUs ($19–$249, per <a href="/pricing" style="color: var(--cyan);">PRICING.html</a>) exist only for the capture / orchestration layer where software alone isn't enough.
-    </div>
-
-    <h3 style="margin-top: 32px;">When to use this language</h3>
-    <div class="voice-grid">
-      <div class="voice do" style="border-left-color: var(--cyan);">
-        <h4>Use it for</h4>
-        <ul>
-          <li>Investor / acquirer conversations</li>
-          <li>Second-tier audiophile-brand partnership outreach (B&amp;W, Naim, KEF, McIntosh — they speak the technical layer)</li>
-          <li>Anthropic DevRel / Skills marketplace launch-partner pitches</li>
-          <li>Hacker News submissions + technical press (The Verge, Ars Technica, The Register)</li>
-          <li>Engineering-recruit conversations once we hire</li>
-        </ul>
-      </div>
-      <div class="voice dont">
-        <h4>Don't use it for</h4>
-        <ul>
-          <li>Anywhere consumers land — <code>index.html</code>, App Store / direct-sale page, ads, social posts</li>
-          <li>Tutorial / onboarding / support docs</li>
-          <li>Customer support replies</li>
-          <li>Anything where "five pillars" wins by being concrete and brand-specific</li>
-        </ul>
-      </div>
-    </div>
-
-    <p style="margin-top: 24px; color: var(--text-dim); font-size: 14px;">
-      The five pillars and this technical framing aren't in tension — they're two surfaces of the same product. The pillars sell what users feel; the technical framing sells what builders, partners, and investors understand. Both are accurate; neither replaces the other.
-    </p>
-  </div>
-</section>
-
-<!-- 4. Words to use, words to avoid -->
-<section>
-  <div class="wrap">
-    <h2 data-animate="fade-up"><span class="num">4</span>Words to use, words to avoid</h2>
-    <p class="subhead">The vocabulary that supports the voice.</p>
-
-    <div class="voice-grid">
-      <div class="voice do">
-        <h4>Use these</h4>
-        <ul>
-          <li><strong>Speakers</strong> (not "endpoints", "zones", "rooms")</li>
-          <li><strong>Plays</strong> (not "streams"; we're allowed to say streams in tech-audience copy but consumers don't care)</li>
-          <li><strong>Your AirPlay</strong>, <strong>your Sonos</strong>, <strong>your Chromecast</strong> — possessive, makes it about the user's existing setup</li>
-          <li><strong>In sync</strong> (not "synchronized"; one word is the consumer word)</li>
-          <li><strong>Works with</strong> (not "supports", "integrates with")</li>
-          <li><strong>Cross-ecosystem</strong> (the technical term for what we do; use in tech-audience copy)</li>
-          <li><strong>Whole house</strong>, <strong>every room</strong></li>
-          <li><strong>Pay once</strong> (always; reinforces the model)</li>
-          <li><strong>Tuned to your room</strong> (Room Tuning addon copy)</li>
-        </ul>
-      </div>
-      <div class="voice dont">
-        <h4>Avoid these</h4>
-        <ul>
-          <li><strong>"Powered by"</strong> — empty, marketing-speak</li>
-          <li><strong>"Smart"</strong> — meaningless, especially "smart audio"</li>
-          <li><strong>"Premium"</strong> — we're not premium; we're accessible</li>
-          <li><strong>"Pro"</strong> — except in actual SKU names ("Hub Pro")</li>
-          <li><strong>"Studio-quality"</strong> — we're consumer-grade; making this claim courts an audiophile fight we can't win and don't need</li>
-          <li><strong>"HiFi"</strong> — same reason; we're not Roon, we don't position there</li>
-          <li><strong>"Unlock"</strong> — implies you're locked out; the addons add new abilities, they don't unlock something we hid</li>
-          <li><strong>"Compatible with"</strong> — passive; "works with" is direct</li>
-          <li><strong>"For audiophiles"</strong> — narrow audience that's already served by Roon / Bluesound</li>
-          <li><strong>"Cloud"</strong> — full stop. We have nothing in the cloud and that's the point</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 5. Antithesis: who we are NOT -->
-<section>
-  <div class="wrap">
-    <h2 data-animate="fade-up"><span class="num">5</span>The antithesis test</h2>
-    <p class="subhead">Defining ourselves by what we're not. If a piece of copy could plausibly be said by these companies, we wrote it wrong.</p>
-
-    <div class="anti-grid">
-      <div class="anti" style="border-color: var(--accent);">
-        <div class="them">
-          <strong>NOT a HomePod buyer's argument</strong>
-          "Buy new speakers, get lossless wireless." Except AirPlay 2 isn't lossless — it transcodes to AAC ~256 kbps.
-        </div>
-        <div class="arrow">→</div>
-        <div class="us">
-          <strong>WE'RE THIS</strong>
-          Keep your old AirPlay 1 speakers — the only wireless path Apple ever shipped that's actually lossless — and we'll send Apple Music Lossless to them as the original ALAC stream.
-        </div>
-      </div>
-
-      <div class="anti">
-        <div class="them">
-          <strong>NOT a Belkin / WiiM adapter</strong>
-          One box per speaker, $60–149 each. Buy three, and you're at $200–450 in adapters before anything plays in sync.
-        </div>
-        <div class="arrow">→</div>
-        <div class="us">
-          <strong>WE'RE THIS</strong>
-          One Mac app, every speaker, one purchase. The adapters were always the workaround, not the answer.
-        </div>
-      </div>
-
-      <div class="anti">
-        <div class="them">
-          <strong>NOT Roon</strong>
-          We're not for the audiophile who has $700 of DAC and a calibrated room.
-        </div>
-        <div class="arrow">→</div>
-        <div class="us">
-          <strong>WE'RE THIS</strong>
-          For the household with a mix of normal speakers that should just play together.
-        </div>
-      </div>
-
-      <div class="anti">
-        <div class="them">
-          <strong>NOT a Sonos killer</strong>
-          We don't try to replace Sonos. Sonos is great if you only own Sonos.
-        </div>
-        <div class="arrow">→</div>
-        <div class="us">
-          <strong>WE'RE THIS</strong>
-          The bridge for households that own Sonos AND other brands.
-        </div>
-      </div>
-
-      <div class="anti">
-        <div class="them">
-          <strong>NOT Apple</strong>
-          We don't tell you to throw out your non-Apple speakers and buy HomePods.
-        </div>
-        <div class="arrow">→</div>
-        <div class="us">
-          <strong>WE'RE THIS</strong>
-          Makes your existing mix work, including the HomePod you already own.
-        </div>
-      </div>
-
-      <div class="anti">
-        <div class="them">
-          <strong>NOT Airfoil</strong>
-          We're not "the same thing for less money."
-        </div>
-        <div class="arrow">→</div>
-        <div class="us">
-          <strong>WE'RE THIS</strong>
-          Mac for desk audio AND a Hub Pro on the TV's HDMI ARC for the TV-anchored household. With Room Tuning.
-        </div>
-      </div>
-
-      <div class="anti">
-        <div class="them">
-          <strong>NOT a subscription</strong>
-          We don't take recurring money for software that should be a one-time buy.
-        </div>
-        <div class="arrow">→</div>
-        <div class="us">
-          <strong>WE'RE THIS</strong>
-          Pay once. Updates included. Own it.
-        </div>
-      </div>
-
-      <div class="anti">
-        <div class="them">
-          <strong>NOT a cloud service</strong>
-          We don't process your audio in some datacenter.
-        </div>
-        <div class="arrow">→</div>
-        <div class="us">
-          <strong>WE'RE THIS</strong>
-          Your LAN. Your devices. Nothing leaves the house.
+      <div class="map-legend rv">
+        <h3>Nobody sells the top-right.</h3>
+        <p>The players who span ecosystems are either priced for audiophiles (Roon, Bluesound) or are headless DIY daemons (AirConnect, shairport-sync). The consumer-friendly options stay inside one garden (Sonos, Apple). SuperAudio is the only pin that's cross-ecosystem, consumer-ready, <em>and</em> affordable.</p>
+        <div class="pins">
+          <div class="r us"><b>SuperAudio</b> plays everything you own, one polished app, $19.99</div>
+          <div class="r"><b>Airfoil</b> close on breadth, but pricier and no room tuning</div>
+          <div class="r"><b>AirConnect</b> cross-ecosystem but a headless daemon, not a product</div>
+          <div class="r"><b>Sonos / Apple</b> polished, but only their own hardware</div>
+          <div class="r"><b>Roon / BluOS</b> premium ecosystems for dedicated gear</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 6. The marketing copy test -->
-<section>
+<section class="band">
   <div class="wrap">
-    <h2 data-animate="fade-up"><span class="num">6</span>The three-question test</h2>
-    <p class="subhead">Run any new marketing copy through these. If any answer is "no", rewrite.</p>
-
-    <div class="test-grid">
-      <div class="test">
-        <div class="label">Q 1 · Specificity</div>
-        <div class="q">Does it name a real speaker, protocol, or price?</div>
-        <div class="why">Specifics are credible. "Plays to your speakers" is forgettable; "plays to your 2014 B&amp;W A5 and your gen-1 Sonos Playbar at the same time" is the product.</div>
-      </div>
-      <div class="test">
-        <div class="label">Q 2 · Plain language</div>
-        <div class="q">Could your neighbor (not a tech worker) understand it on first read?</div>
-        <div class="why">Most of our market isn't on AVS Forum. "Cross-protocol fan-out" is the engineer's term; "plays to every speaker, even if they're different brands" is the buyer's term.</div>
-      </div>
-      <div class="test">
-        <div class="label">Q 3 · Antithesis</div>
-        <div class="q">Could Sonos, Apple, Bluesound, Roon, or Spotify say this same sentence about themselves?</div>
-        <div class="why">If yes, you've described the category, not us. Push the sentence until it's something only we can credibly say.</div>
-      </div>
+    <div class="sec-head rv">
+      <span class="eyebrow">Who it's for · the mismatched house</span>
+      <h2>Not the person who buys a whole new system. The person who already bought good gear.</h2>
     </div>
-
-    <div class="pullquote">
-      The shorthand: <strong>specific, plain, and only ours.</strong> Three words; three reasons to rewrite a sentence.
+    <div class="grid3">
+      <div class="pcard rv"><div class="tag">Persona 01</div><h4>The stranded audiophile</h4><p>Bought B&amp;W or a nice AirPlay speaker years ago. Still sounds better than most new gear — but the modern app pretends it doesn't exist. Wants it back in the mix without replacing it.</p></div>
+      <div class="pcard rv"><div class="tag">Persona 02</div><h4>The mixed-brand household</h4><p>A Sonos in the kitchen, an AirPlay speaker in the office, a Bluetooth thing on the porch. No single app plays them together. Just wants one song, everywhere, at once.</p></div>
+      <div class="pcard rv"><div class="tag">Persona 03</div><h4>The anti-subscription buyer</h4><p>Done renting software. Done being upsold. Wants to pay once for a tool that respects their old hardware and their privacy — no cloud, no account, no telemetry.</p></div>
     </div>
   </div>
 </section>
 
-<!-- 7. Visual identity -->
-<section>
+<section class="band">
   <div class="wrap">
-    <h2 data-animate="fade-up"><span class="num">7</span>Visual identity</h2>
-    <p class="subhead">Dark-first, gradient typography for emphasis, system fonts. Cheap to execute, hard to mistake for a competitor.</p>
-
-    <h3>Palette</h3>
-    <div class="swatches">
-      <div class="swatch" style="background: #0a0a0f; color: #ececf1;">
-        <div class="name">Background</div>
-        <div class="hex">#0a0a0f</div>
-      </div>
-      <div class="swatch" style="background: #14141c; color: #ececf1;">
-        <div class="name">Card</div>
-        <div class="hex">#14141c</div>
-      </div>
-      <div class="swatch" style="background: linear-gradient(135deg, #ff6a3d 0%, #ffba6d 100%); color: #0a0a0f;">
-        <div class="name">Primary gradient</div>
-        <div class="hex">#ff6a3d → #ffba6d</div>
-      </div>
-      <div class="swatch" style="background: #67e8f9; color: #0a0a0f;">
-        <div class="name">Secondary (cyan)</div>
-        <div class="hex">#67e8f9</div>
-      </div>
+    <div class="sec-head rv">
+      <span class="eyebrow">The combination · what nobody bundles</span>
+      <h2>Any one of these exists somewhere. All of them, in one $20 app, doesn't.</h2>
     </div>
-    <p>The orange-to-amber gradient is the primary signature. It appears on the wordmark, on featured stats, on key headlines (set in italic <em>like this</em>). Cyan is reserved for "info" and "defense" callouts (used sparingly so it stays distinct). Reds (#f87171) for "high risk," ambers (#fbbf24) for "medium," greens (#4ade80) for "good" or "low risk" — these are the same triad we use in the risk register and competitive landscape.</p>
-
-    <h3>Type</h3>
-    <p>System font stack only: <code>-apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif</code>. Reasons: (1) zero load time, (2) feels native on macOS / iOS, (3) signals "indie product, not corporate." Headlines use heavy weights (800) with tight letter-spacing (-0.025em); body uses 400/500.</p>
-
-    <h3>Logo / wordmark</h3>
-    <p>Wordmark only for v1 — "SuperAudio" set in the primary gradient. <strong>We don't have a logo mark yet</strong>, and that's fine. A logo mark designed before the brand is fully formed dates poorly. A clean, distinctive wordmark is enough through M8 (Mac app launch). Logo mark comes in M13 (first hardware) — it'll appear on the Hub Stick case, the box, and the warranty card.</p>
-  </div>
-</section>
-
-<!-- 8. Conclusion -->
-<section>
-  <div class="wrap">
-    <h2 data-animate="fade-up"><span class="num">8</span>The point of all this</h2>
-
-    <div class="wedge">
-      <div class="label">Positioning as defense</div>
-      <div class="title">Without a fixed voice, every new piece of copy <em>drifts toward the average.</em></div>
-      <p>The average for indie audio products is over-promised hype, vague claims, and a tagline that could be on any of 50 other products. Avoiding that drift requires the discipline of saying "is this specific, plain, and only ours?" out loud — every blog post, every App Store description, every support reply.</p>
-      <p>The brand isn't a logo. It's the consistency of voice across surfaces, the predictability of what we will and won't promise, and the relationship that consistency builds with customers over years. <strong>Pricing decisions are positioning decisions. Feature decisions are positioning decisions. This document is the rulebook.</strong></p>
+    <div class="combo rv">
+      <div class="ih">// The stack, in one purchase</div>
+      <ul>
+        <li><span class="ck">▸</span><span><b>Cross-ecosystem fan-out</b> <span class="m">— AirPlay 1 + every Sonos, together</span></span></li>
+        <li><span class="ck">▸</span><span><b>Supports stranded old hardware</b> <span class="m">— not just this year's models</span></span></li>
+        <li><span class="ck">▸</span><span><b>Cross-protocol room tuning</b> <span class="m">— measurement nobody offers at this price</span></span></li>
+        <li><span class="ck">▸</span><span><b>Consumer price</b> <span class="m">— $19.99, roughly half the closest app</span></span></li>
+        <li><span class="ck">▸</span><span><b>No subscription, no account</b> <span class="m">— buy once, own it</span></span></li>
+        <li><span class="ck">▸</span><span><b>100% local &amp; private</b> <span class="m">— no cloud, no telemetry</span></span></li>
+      </ul>
+      <div class="foot">That bundle is the moat. Everyone else's product is locked to their ecosystem — ours is locked to your living room.</div>
     </div>
   </div>
 </section>
+
+<section class="band waitlist" id="waitlist">
+  <div class="wrap">
+    <h2 class="rv">Built for the speakers you already love.</h2>
+    <p class="rv">Two emails, ever: one when the Mac beta opens with early-bird $12, one at launch. Then we stop.</p>
+    <form class="wl rv" id="wlForm" novalidate>
+      <input type="email" id="wlEmail" placeholder="you@example.com" aria-label="Email address" required>
+      <button type="submit" class="btn btn-primary">Get notified</button>
+    </form>
+    <div class="wl-done" id="wlDone"><span class="led"></span> Signal locked — you're on the list.</div>
+    <div class="wl-note rv">No spam. No sharing. Unsubscribe in one click.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><div class="frow">
+    <span>SuperAudio · multi-room audio for the mismatched real world · spacelabforever.com</span>
+    <span>LAN-only · no telemetry · <a href="#top">back to top ↑</a></span>
+  </div></div>
+</footer>

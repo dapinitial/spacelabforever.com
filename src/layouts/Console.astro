@@ -1,0 +1,36 @@
+---
+/* Console reskin layout — used by the four reimagined pages (landing, pricing,
+   positioning, competitive-landscape). Self-contained: the page markup + CSS is
+   injected raw; interactions come from /console.js; the waitlist funnel + CTA
+   tracking come from /analytics.js (window.SLF). Legacy pages stay on Base.astro. */
+interface Props {
+  title: string;
+  description?: string;
+}
+const {
+  title,
+  description = 'SuperAudio — multi-room audio for the Mac. Every speaker in your house, in sync, including the old ones. AirPlay 1 + Sonos, from $19.99.',
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Pre-launch: keep the site out of search indexes until we're ready. -->
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content={description} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <link rel="icon" href="/favicon.svg" />
+  <title>{title}</title>
+</head>
+<body>
+  <slot />
+  <!-- console reskin runtime: canvas scopes, scroll reveal, waitlist wiring -->
+  <script is:inline defer src="/console.js"></script>
+  <!-- privacy-first, cookieless telemetry + waitlist → Supabase (window.SLF) -->
+  <script is:inline defer src="/analytics.js"></script>
+</body>
+</html>

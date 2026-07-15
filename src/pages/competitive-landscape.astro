@@ -1,12 +1,10 @@
 ---
-import Base from '../layouts/Base.astro';
-import '../styles/shared.css';
-import '../styles/competitive-landscape.css';
+import Console from '../layouts/Console.astro';
 import content from '../content/competitive-landscape.html?raw';
-const title = "SuperAudio — Competitive Landscape & Legal Posture";
-const description = "SuperAudio — competitive landscape and legal posture. Hardware, software, room tuning, patents, regulatory hurdles. The full picture in one place.";
 ---
 
-<Base title={title} description={description}>
+<Console
+  title="SuperAudio — Competitive Landscape"
+  description="Plenty of tools do part of this — one column does all of it. SuperAudio vs Airfoil, AirConnect, Sonos, and Roon.">
   <Fragment set:html={content} />
-</Base>
+</Console>
