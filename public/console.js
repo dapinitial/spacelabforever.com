@@ -64,6 +64,37 @@
     else { var ms = null; requestAnimationFrame(function l(ts) { if (ms === null) ms = ts; mkDraw((ts - ms) / 1000); requestAnimationFrame(l); }); }
   }
 
+  /* ---- animated favicon: the brand mini-scope, live in the browser tab.
+     Repaints a 64px canvas ~12fps and swaps <link rel="icon">. Static
+     favicon.svg stays the fallback for reduced-motion, Safari, and first paint. */
+  (function () {
+    if (reduce) return;
+    var link = document.querySelector('link[rel="icon"]');
+    if (!link) { link = document.createElement('link'); link.setAttribute('rel', 'icon'); document.head.appendChild(link); }
+    var fc = document.createElement('canvas'); fc.width = 64; fc.height = 64;
+    var fx = fc.getContext('2d'); if (!fx) return;
+    var CY = '#46d4e6', BG = '#0c1319', BR = '#2f424e';
+    function rr(x, y, w, h, r) { fx.beginPath(); fx.moveTo(x + r, y); fx.arcTo(x + w, y, x + w, y + h, r); fx.arcTo(x + w, y + h, x, y + h, r); fx.arcTo(x, y + h, x, y, r); fx.arcTo(x, y, x + w, y, r); fx.closePath(); }
+    function drawFav(t) {
+      fx.clearRect(0, 0, 64, 64);
+      rr(4, 4, 56, 56, 15); fx.fillStyle = BG; fx.fill();
+      rr(4, 4, 56, 56, 15); fx.lineWidth = 2; fx.strokeStyle = BR; fx.stroke();
+      rr(4, 4, 56, 56, 15); fx.save(); fx.clip();
+      fx.strokeStyle = CY; fx.lineWidth = 3.4; fx.lineCap = 'round'; fx.lineJoin = 'round'; fx.shadowColor = CY; fx.shadowBlur = 6;
+      fx.beginPath();
+      for (var x = 0; x <= 64; x += 2) { var xr = x * 52 / 64; var y = 32 + Math.sin(xr * 0.34 + t * 2.4) * 11 * Math.exp(-Math.pow((xr - 26) / 18, 2)); if (x === 0) fx.moveTo(x, y); else fx.lineTo(x, y); }
+      fx.stroke(); fx.shadowBlur = 0; fx.restore();
+    }
+    var last = 0, fs = null;
+    requestAnimationFrame(function loop(ts) {
+      if (!document.hidden) {
+        if (fs === null) fs = ts;
+        if (ts - last > 80) { last = ts; drawFav((ts - fs) / 1000); try { link.setAttribute('href', fc.toDataURL('image/png')); } catch (e) { } }
+      }
+      requestAnimationFrame(loop);
+    });
+  })();
+
   /* ---- signal-path diagram (landing) ---- */
   var pc = document.getElementById('pathCanvas');
   if (pc) {
